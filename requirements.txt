@@ -1,0 +1,5 @@
+pip>=24.2
+attrs>=23.2.0
+pillow>=10.3.0
+filelock>=3.14.0
+uuid>=1.30
