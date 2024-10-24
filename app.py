@@ -25,9 +25,7 @@ async def main():
     bot = Bot(token=bot_token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
     dp = Dispatcher()
-
     dp.include_router(router)
-
     await dp.start_polling(bot)
 
 
