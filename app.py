@@ -10,13 +10,14 @@ from conf import bot_token
 
 from bot.home_menu.home_menu import router as home_menu_router
 from bot.home_menu.company_info import router as company_info_router
+from bot.home_menu.faq import router as faq_router
 
 
 async def main():
     bot = Bot(token=bot_token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
     dp = Dispatcher()
-    dp.include_routers(home_menu_router, company_info_router)
+    dp.include_routers(home_menu_router, company_info_router, faq_router)
     await dp.start_polling(bot)
 
 
