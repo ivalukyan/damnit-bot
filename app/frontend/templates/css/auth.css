@@ -1,5 +1,5 @@
 body{
-    background-color: #241E1E;
+    background-color: #1a1b1b;
     color: #ffff;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
@@ -7,6 +7,7 @@ body{
 
 .main-container{
     padding: 12px;
+    margin-top: 50px;
 }
 
 h2{
@@ -21,14 +22,63 @@ label{
 .input-form{
     display: flex;
     width: 100%;
-    padding: 6px;
+    padding: 7px;
     border-radius: 8px;
     border: none;
     outline: none;
-    background-color: #454545;
+    background-color: #303131;
     color: #ffff;
 }
 
 .input-form::placeholder{
     color: #ffff;
+}
+
+.main-container button{
+    display: flex;
+    width: 100%;
+    margin-top: 15px;
+    padding: 7px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    justify-content: center;
+    background-color: #484949;
+    color: #000;
+}
+
+.buttons-move{
+    display: flex;
+    gap: 5px;
+    padding: 2px 2px 2px 2px;
+    border: 1px solid #303131;
+    border-radius: 8px;
+    margin: 8px;
+}
+
+.buttons-move .select-but{
+    width: 100%;
+    background-color: #303131;
+    border: none;
+    outline: none;
+    padding: 3px;
+    border-radius: 8px;
+    color: #ffff;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mb-5 {
+    animation: fadeInUp 0.8s ease-in;
+    opacity: 0;
+    animation-fill-mode: forwards;
 }

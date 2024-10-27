@@ -12,15 +12,21 @@
     <title>Авторизация</title>
 </head>
 <body>
-    <nav class="navbar">
-        <h2>Авторизация</h2>
-    </nav>
-    <div class="main-container" id="mainId">
-        <div class="mb-3">
-            <label class="form-label" for="name-input">ФИО</label>
-            <input id="name-input" name="name" class="input-form" placeholder="Как вас зовут?" autocomplete="off">
-        </div>
+<nav class="navbar">
+    <h2>Авторизация</h2>
+</nav>
+<div class="buttons-move">
+    <button type="button" class="select-but" id="signinButtonId">Войти</button>
+    <button type="button" class="select-but" id="signupButtonId">Зарегестриваться</button>
+</div>
+<div class="main-container" id="mainContainer">
+    <div class="mb-5" id="authContainer">
+        <label class="form-label" for="phone-input">Номер телефона</label>
+        <input id="phone-input" name="phone" type="text" class="input-form" placeholder="+7 (9XX) XXX XX XX"
+               autocomplete="off" required>
+        <button type="button" id="AuthButtonId">Войти</button>
     </div>
+</div>
 </body>
-<script src="scripts/auth.ts"></script>
+<script src="scripts/auth.js"></script>
 </html>
