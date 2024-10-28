@@ -47,6 +47,10 @@ label{
     color: #000;
 }
 
+.main-container button:active{
+    background-color: #303131;
+}
+
 .buttons-move{
     display: flex;
     gap: 5px;

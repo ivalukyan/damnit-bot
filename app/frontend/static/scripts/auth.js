@@ -8,6 +8,61 @@ const signUpButton = document.getElementById('signupButtonId') || null;
 const authButton = document.getElementById('AuthButtonId') || null;
 const registrationButton = document.getElementById('RegistrationButtonId') || null;
 
+
+async function login(){
+    const phoneInput = document.getElementById('phone-input').value || "";
+
+    if (phoneInput){
+        const payload = new URLSearchParams({
+            username: phoneInput,
+            password: "pass"
+        });
+
+        try{
+            const response = await axios.post('/auth/token', payload, {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            });
+
+            const token = response.data.access_token;
+            localStorage.setItem("token", token);
+
+            location.replace('/profile');
+        } catch (e) {
+            console.log(e);
+        }
+
+
+    }
+
+    //location.replace('/profile/');
+}
+
+async function signUp(){
+    const nameInput = document.getElementById('name-input').value || "";
+    const phoneInput = document.getElementById('phone-input').value;
+    const emailInput = document.getElementById('email-input').value || "";
+
+    const payload = {
+            fullname: nameInput,
+            phone: phoneInput,
+            email: emailInput
+    }
+
+    try{
+        await axios.post('/sign_up', payload).then(
+                async function (response){
+                    console.log(response);
+                })
+    } catch (e){
+        console.log(e);
+    }
+
+    //location.replace('/profile/');
+}
+
+
 async function activeSignInButton() {
     const registerContainer = document.getElementById('registrationContainer') || null;
     await removeElement(registerContainer);
@@ -27,6 +82,7 @@ async function activeSignUpButton() {
     signInButton.style.backgroundColor = 'transparent';
     await createRegistrationElement();
 }
+
 
 async function createAuthElements() {
     const mainContainer = document.getElementById('mainContainer');
@@ -53,6 +109,7 @@ async function createAuthElements() {
     but.id = 'AuthButtonId';
     but.type = 'button';
     but.textContent = 'Войти';
+    but.onclick = login;
 
     divElem.appendChild(labelElem);
     divElem.appendChild(inputPhoneElem);
@@ -131,6 +188,7 @@ async function createRegistrationElement() {
     but.id = 'RegistrationButtonId';
     but.type = 'button';
     but.textContent = 'Зарегистрироваться';
+    but.onclick = signUp;
 
     divElem.appendChild(divName);
     divElem.appendChild(divPhone);
@@ -154,3 +212,5 @@ signUpButton.style.backgroundColor = 'transparent';
 
 signInButton.onclick = activeSignInButton;
 signUpButton.onclick = activeSignUpButton;
+
+authButton.onclick = login;
