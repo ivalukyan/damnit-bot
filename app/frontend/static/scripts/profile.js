@@ -1,3 +1,8 @@
 const token = localStorage.getItem('token') || null;
 
-console.log("token: ", token)
+
+if (token) {
+    console.log("token: ", token);
+} else {
+    location.replace("/");
+}

@@ -10,17 +10,18 @@ from db.database import Users
 from sqlalchemy.orm import Session
 
 router = APIRouter(
-    tags=['Авторизация']
+    tags=['Авторизация'],
+    prefix="/auth"
 )
 
 templates = Jinja2Templates(directory="frontend/templates")
 
-@router.get('/auth')
+@router.get('/')
 async def auth(request: Request):
     return templates.TemplateResponse('auth.html', {'request': request})
 
 
-@router.post("/auth/token")
+@router.post("/token")
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
                                  db_session: Session = Depends(get_db_session)) -> Token:
     user = authenticate_user(db_session, form_data.username)

@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from uuid import UUID
 
 
 class Token(BaseModel):
@@ -9,3 +10,10 @@ class UserSchemas(BaseModel):
     fullname: str | None = None
     phone: str
     email: str | None = None
+
+
+class Profile(BaseModel):
+    id: UUID
+    fullname: str
+    phone: str
+    email: str

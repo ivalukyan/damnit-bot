@@ -1,19 +1,24 @@
 from fastapi import APIRouter, Depends, Request
 from starlette.templating import Jinja2Templates
 
-from backend.auth.model import UserSchemas
-from db.database import Users as UsersDB
 from backend.auth.dependencies import get_current_user
-
+from backend.auth.model import Profile
+from db.database import Users
 
 router = APIRouter(
-    tags=["Профиль"]
+    tags=["Профиль"],
+    prefix="/user"
 )
 
 templates = Jinja2Templates(directory="frontend/templates")
 
 
 
-@router.get('/profile', response_model=UserSchemas)
-async def get_profile_user(request: Request, user: UsersDB = Depends(get_current_user)):
-    return templates.TemplateResponse("profile.html", {"request": request, "user": user})
+@router.get('/', response_model=Profile)
+async def get_user_data(request: Request, user: Users = Depends(get_current_user)):
+    return user
+
+
+@router.get("/profile")
+async def profile_view(request: Request):
+    return templates.TemplateResponse("profile.html", {'request': request})

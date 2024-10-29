@@ -9,18 +9,8 @@ from backend.auth.utils import SECRET_KEY, ALGORITHM
 from db.database import Users, SessionMaker
 from sqlalchemy.orm import Session
 
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
-
-
-async def verify_token(token: str = Depends(oauth2_scheme)):
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        phone: str = payload.get("sub")
-        if not phone:
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid token")
-        return payload
-    except JWTError:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid token")
 
 
 def get_db_session():
@@ -55,7 +45,7 @@ def get_current_user(db_session: Session = Depends(get_db_session), token: str =
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         phone: str = payload.get("sub")
-        print(phone)
+
         if phone is None:
             raise credentials_exception
     except JWTError:
@@ -64,3 +54,14 @@ def get_current_user(db_session: Session = Depends(get_db_session), token: str =
     user = get_user(db_session, phone)
 
     return user
+
+
+async def verify_token(token: str = Depends(oauth2_scheme)):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        phone: str = payload.get("sub")
+        if not phone:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid token")
+        return phone
+    except JWTError:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid token")

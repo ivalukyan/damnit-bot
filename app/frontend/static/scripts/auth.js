@@ -9,53 +9,64 @@ const authButton = document.getElementById('AuthButtonId') || null;
 const registrationButton = document.getElementById('RegistrationButtonId') || null;
 
 
-async function login(){
+async function login() {
     const phoneInput = document.getElementById('phone-input').value || "";
 
-    if (phoneInput){
+    if (phoneInput) {
         const payload = new URLSearchParams({
             username: phoneInput,
             password: "pass"
         });
 
-        try{
+        try {
             const response = await axios.post('/auth/token', payload, {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 }
             });
 
-            const token = response.data.access_token;
-            localStorage.setItem("token", token);
+            if (response.status === 200) {
+                const token = response.data.access_token;
+                localStorage.setItem("token", token);
+                location.replace("/user/profile")
+            } else {
+                console.log("Phone input is uncorrect");
+            }
 
-            location.replace('/profile');
         } catch (e) {
             console.log(e);
         }
 
 
     }
-
-    //location.replace('/profile/');
 }
 
-async function signUp(){
+async function user(accessToken){
+    await axios.get("/user", {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${accessToken}`
+        }
+    })
+}
+
+async function signUp() {
     const nameInput = document.getElementById('name-input').value || "";
     const phoneInput = document.getElementById('phone-input').value;
     const emailInput = document.getElementById('email-input').value || "";
 
     const payload = {
-            fullname: nameInput,
-            phone: phoneInput,
-            email: emailInput
+        fullname: nameInput,
+        phone: phoneInput,
+        email: emailInput
     }
 
-    try{
-        await axios.post('/sign_up', payload).then(
-                async function (response){
-                    console.log(response);
-                })
-    } catch (e){
+    try {
+        await axios.post('/auth/sign_up', payload).then(
+            async function (response) {
+                console.log(response);
+            })
+    } catch (e) {
         console.log(e);
     }
 
