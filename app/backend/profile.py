@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, Request
+from sqlalchemy.orm import Session
 from starlette.templating import Jinja2Templates
 
 from backend.auth.dependencies import get_current_user
@@ -11,7 +12,6 @@ router = APIRouter(
 )
 
 templates = Jinja2Templates(directory="frontend/templates")
-
 
 
 @router.get('/', response_model=Profile)
