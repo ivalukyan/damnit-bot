@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends, Request
 from sqlalchemy.orm import Session
 from starlette.templating import Jinja2Templates
 
-from backend.auth.dependencies import get_current_user
-from backend.auth.model import Profile, UserSchemas
+from auth.dependencies import get_current_user
+from auth.model import Profile, UserSchemas
 from db.database import Users
 
 router = APIRouter(
@@ -14,7 +14,7 @@ router = APIRouter(
 templates = Jinja2Templates(directory="frontend/templates")
 
 
-@router.get('/profile', response_model=Profile)
+@router.get('', response_model=Profile)
 async def get_user_data(request: Request, user: Profile = Depends(get_current_user)):
     return user
 

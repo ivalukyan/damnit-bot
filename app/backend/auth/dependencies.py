@@ -4,8 +4,8 @@ from starlette import status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 
-from backend.auth.model import UserSchemas, Profile
-from backend.auth.utils import SECRET_KEY, ALGORITHM
+from auth.model import UserSchemas, Profile
+from auth.utils import SECRET_KEY, ALGORITHM
 from db.database import Users, SessionMaker
 from sqlalchemy.orm import Session
 

@@ -3,9 +3,9 @@ from fastapi.params import Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.templating import Jinja2Templates
 
-from backend.auth.model import Token, UserSchemas
-from backend.auth.utils import create_access_token
-from backend.auth.dependencies import authenticate_user, get_db_session, get_user
+from auth.model import Token, UserSchemas
+from auth.utils import create_access_token
+from auth.dependencies import authenticate_user, get_db_session, get_user
 from db.database import Users
 from sqlalchemy.orm import Session
 

@@ -5,8 +5,8 @@ from fastapi.staticfiles import StaticFiles
 from starlette.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.profile import router as profile_router
-from backend.auth.routers import router as auth_router
+from profile.routers import router as profile_router
+from auth.routers import router as auth_router
 
 app = FastAPI()
 
