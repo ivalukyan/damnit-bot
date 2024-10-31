@@ -24,7 +24,7 @@ async def auth(request: Request):
 @router.post("/token")
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
                                  db_session: Session = Depends(get_db_session)) -> Token:
-    user = authenticate_user(db_session, form_data.username)
+    user = await authenticate_user(db_session, form_data.username)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -38,7 +38,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
 
 @router.post("/sign_up", response_model=UserSchemas)
 async def sign_up(user: UserSchemas, db_session: Session = Depends(get_db_session)):
-    user_db = get_user(db_session, user.phone)
+    user_db = await get_user(db_session, user.phone)
     if user_db:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User already exists")
 

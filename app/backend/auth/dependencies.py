@@ -4,13 +4,13 @@ from starlette import status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 
-from backend.auth.model import UserSchemas
+from backend.auth.model import UserSchemas, Profile
 from backend.auth.utils import SECRET_KEY, ALGORITHM
 from db.database import Users, SessionMaker
 from sqlalchemy.orm import Session
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
 
 
 def get_db_session():
@@ -24,18 +24,18 @@ def get_db_session():
         db.close()
 
 
-def get_user(db_session: Session, phone: str):
+async def get_user(db_session: Session, phone: str):
     return db_session.query(Users).filter(Users.phone == phone).first()
 
 
-def authenticate_user(db_session: Session, phone: str):
-    user = get_user(db_session, phone)
+async def authenticate_user(db_session: Session, phone: str):
+    user = await get_user(db_session, phone)
     if not user:
         return None
     return user
 
 
-def get_current_user(db_session: Session = Depends(get_db_session), token: str = Depends(oauth2_scheme)):
+async def get_current_user(db_session: Session = Depends(get_db_session), token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -51,9 +51,9 @@ def get_current_user(db_session: Session = Depends(get_db_session), token: str =
     except JWTError:
         raise credentials_exception
 
-    user = get_user(db_session, phone)
+    user = await get_user(db_session, phone)
 
-    return user
+    return Profile(id=user.id, fullname=user.fullname, phone=user.phone, email=user.email)
 
 
 async def verify_token(token: str = Depends(oauth2_scheme)):
