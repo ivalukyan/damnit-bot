@@ -12,7 +12,7 @@ router = APIRouter(
 )
 
 
-@router.get('/profile', response_model=Profile)
+@router.get('/me', response_model=Profile)
 async def get_user_data(request: Request, user: Profile = Depends(get_current_user)):
     return user
 

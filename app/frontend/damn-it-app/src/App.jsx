@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Header from "./components/Header";
-import { UserConetext, UserProvider } from "./context/UserContext";
+import { UserConetext} from "./context/UserContext";
 
 const App = () => {
     const [message, setMessage] = useState("")
@@ -15,8 +15,8 @@ const App = () => {
             "Content-Type": "application/json",
             },
         };
-        const response = await fetch("/", requestOptions);
-        const data = response.json();
+        const response = await fetch("/api", requestOptions);
+        const data = await response.json();
 
         if (!response.ok){
             console.log("something messed up");

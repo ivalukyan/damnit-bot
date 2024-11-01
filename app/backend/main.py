@@ -18,10 +18,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get('/')
-async def index(request: Request):
-    redirect_url = request.url_for("auth")
-    return RedirectResponse(redirect_url)
+@app.get("/api")
+async def root():
+    return {"message": "It`s API page"}
+
 app.include_router(profile_router)
 app.include_router(auth_router)
 

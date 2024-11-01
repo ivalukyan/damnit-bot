@@ -1,4 +1,4 @@
-import React, {useState, useContext} from  "react";
+import React, {useState} from  "react";
 
 import ErrorMessage from "./ErrorMessage";
 import { UserConetext } from "../context/UserContext";
@@ -9,10 +9,16 @@ const Login = () =>{
     const [errorMessage, setErrorMessage] = useState("");
 
     const submitLogin = async () => {
+
+        const payload = new URLSearchParams({
+            username: phone,
+            password: "pass"
+        });
+
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/x-www-form-urlencoded"},
-            body: JSON.stringify(`grant_type=&username=${phone}&password=pass&scope=&client_id=&client_secret=`)
+            body: payload
         }
 
         const response = await fetch("/auth/token", requestOptions);
