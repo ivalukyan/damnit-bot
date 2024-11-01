@@ -1,11 +1,12 @@
-import React, {useState} from  "react";
+
+import React, {useContext, useState} from  "react";
 
 import ErrorMessage from "./ErrorMessage";
 import { UserConetext } from "../context/UserContext";
 
 const Login = () =>{
     const [phone, setPhone] = useState("");
-    const [, setToken] = useState(UserConetext);
+    const [, setToken] = useContext(UserConetext);
     const [errorMessage, setErrorMessage] = useState("");
 
     const submitLogin = async () => {
