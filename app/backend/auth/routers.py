@@ -14,11 +14,9 @@ router = APIRouter(
     prefix="/auth"
 )
 
-templates = Jinja2Templates(directory="frontend/templates")
-
 @router.get('/')
-async def auth(request: Request):
-    return templates.TemplateResponse('auth.html', {'request': request})
+async def auth():
+    return {"message": "it`s auth page"}
 
 
 @router.post("/token")

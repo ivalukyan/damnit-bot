@@ -10,8 +10,6 @@ from auth.routers import router as auth_router
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

@@ -11,13 +11,8 @@ router = APIRouter(
     prefix="/user"
 )
 
-templates = Jinja2Templates(directory="frontend/templates")
 
-
-@router.get('', response_model=Profile)
+@router.get('/profile', response_model=Profile)
 async def get_user_data(request: Request, user: Profile = Depends(get_current_user)):
     return user
 
-# @router.get("/profile")
-# async def profile_view(request: Request):
-#     return templates.TemplateResponse("profile.html", {'request': request})

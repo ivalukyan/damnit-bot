@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import "blumba/css/blumba.min.css"
+import "bulma/css/bulma.min.css"
 import App from "./App";
-import { UserProvider } from '../context/UserContext';
+import { UserProvider } from './context/UserContext';
 
 
-ReactDOM.createRoot(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <UserProvider>
     <App />
-  </UserProvider>, document.getElementById('root'));
-
+  </UserProvider>
+);
