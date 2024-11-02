@@ -1,9 +1,8 @@
 
 import React, {useContext, useEffect, useState} from "react";
-import Login from "./components/Login";
-import Register from "./components/Register";
 import Header from "./components/Header";
 import { UserConetext} from "./context/UserContext";
+import MoveButtons from "./components/MoveButtons";
 
 const App = () => {
     const [message, setMessage] = useState("")
@@ -39,7 +38,7 @@ const App = () => {
                 {
                     !token ? (
                         <div className="columns">
-                            <Register /> <Login />
+                            <MoveButtons />
                         </div>
                     ) : (
                         <p>Is protect page</p>
