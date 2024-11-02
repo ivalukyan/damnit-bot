@@ -4,6 +4,7 @@ import React, {useContext, useState} from  "react";
 import ErrorMessage from "./ErrorMessage";
 import { UserConetext } from "../context/UserContext";
 
+
 const Login = () =>{
     const [phone, setPhone] = useState("");
     const [, setToken] = useContext(UserConetext);
@@ -38,7 +39,7 @@ const Login = () =>{
     }
 
     return (
-        <div className="colum">
+        <div className="column">
             <form className="box" onSubmit={handleSubmit}>
                 <h1 className="title has-text-centered">Авторизация</h1>
                 <div className="field">
@@ -55,7 +56,7 @@ const Login = () =>{
                     </div>
                 </div>
                 <ErrorMessage message={errorMessage}/>
-                <button className="button is-primary" type="submit">
+                <button className="button-submit" type="submit">
                     Войти
                 </button>
             </form>

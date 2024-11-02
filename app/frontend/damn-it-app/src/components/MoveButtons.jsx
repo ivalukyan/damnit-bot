@@ -7,21 +7,25 @@ const MoveButtons = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
+        document.getElementById("RegisterBut").style.backgroundColor = "#303131";
+        document.getElementById("LoginBut").style.backgroundColor = "transparent";
         setShowForm(false);
     };
 
     const handleLogin = (e) => {
         e.preventDefault();
+        document.getElementById("LoginBut").style.backgroundColor = "#303131";
+        document.getElementById("RegisterBut").style.backgroundColor = "transparent";
         setShowForm(true);
     }
 
     return (
         <>  
         <div className="buttons-move">
-            <button type="button" className="button" onClick={handleLogin}>
+            <button type="button" className="button" onClick={handleLogin} id="LoginBut">
                     Войти
             </button>
-            <button type="button" className="button" onClick={handleRegister}>
+            <button type="button" className="button" onClick={handleRegister} id="RegisterBut">
                 Зарегестрироваться
             </button>
         </div>

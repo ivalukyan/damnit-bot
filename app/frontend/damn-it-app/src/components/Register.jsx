@@ -34,7 +34,7 @@ const Register = () => {
     }
 
     return (
-        <div className="colum">
+        <div className="column">
             <form className="box" onSubmit={handleSubmit}>
                 <h1 className="title has-text-centered">Регистрация</h1>
                 <div className="field">
@@ -77,7 +77,7 @@ const Register = () => {
                     </div>
                 </div>
                 <ErrorMessage message={errorMessage}/>
-                <button className="button is-primary" type="submit">
+                <button className="button-submit" type="submit">
                     Зарегистрироваться
                 </button>
             </form>

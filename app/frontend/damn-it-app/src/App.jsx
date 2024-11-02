@@ -3,6 +3,8 @@ import React, {useContext, useEffect, useState} from "react";
 import Header from "./components/Header";
 import { UserConetext} from "./context/UserContext";
 import MoveButtons from "./components/MoveButtons";
+import "./App.css"
+
 
 const App = () => {
     const [message, setMessage] = useState("")

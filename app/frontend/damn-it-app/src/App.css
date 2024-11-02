@@ -1,0 +1,72 @@
+.body{
+    background-color: #1a1b1b;
+    color: #ffffff;
+}
+
+.column{
+    margin-top: 20px;
+}
+
+.buttons-move{
+    display: flex;
+    gap: 5px;
+    border: 2px solid #303131;
+    border-radius: 14px;
+    padding: 3px;
+    margin: 30px;
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.button{
+    width: 100%;
+    color: #fff;
+    background: #303131;
+    font-size: 18px;
+    padding: 5px;
+    border: none;
+    outline: none;
+    border-radius: 11px;
+    transition: background 0.8s ease-in-out;
+}
+
+
+
+#RegisterBut{
+    background-color: transparent;
+}
+
+.box{
+    box-shadow: none;
+    opacity: 0;
+    animation: fadeUp 0.8s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.input{
+    font-size: 18px;
+}
+
+.button-submit{
+    background-color: #484949;
+    color: #000;
+    padding: 9px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 11px;
+}
+
+.label{
+    font-size: 20px;
+    font-weight: 600;
+}
