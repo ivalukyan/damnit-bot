@@ -32,7 +32,7 @@
     color: #fff;
     background: #303131;
     font-size: 18px;
-    padding: 5px;
+    padding: 8px;
     border: none;
     outline: none;
     border-radius: 11px;
@@ -69,4 +69,21 @@
 .label{
     font-size: 20px;
     font-weight: 600;
+}
+
+.control{
+    width: 100%;
+    padding: 3px;
+}
+
+.radio{
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 20px;
+    margin-right: 50px;
+    transform: scale(1.5);
+}
+
+.input-radio{
+    margin-right: 5px;
 }

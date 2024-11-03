@@ -1,54 +1,21 @@
 
-import React, {useContext, useEffect, useState} from "react";
-import Header from "./components/Header";
-import { UserConetext} from "./context/UserContext";
-import MoveButtons from "./components/MoveButtons";
+import React from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Auth from "./components/Auth"
+import ApplicationForm from "./components/ApplicationForm";
 import "./App.css"
 
 
 const App = () => {
-    const [message, setMessage] = useState("")
-    const [token] = useContext(UserConetext);
-
-    const getWelcomeMessage = async () => {
-        const requestOptions = {
-            method: "GET",
-            headers: {
-            "Content-Type": "application/json",
-            },
-        };
-        const response = await fetch("/api", requestOptions);
-        const data = await response.json();
-
-        if (!response.ok){
-            console.log("something messed up");
-        }else{
-            setMessage(data.message);
-        }
-    };
-
-    useEffect(() => {
-        getWelcomeMessage();
-    }, []);
 
     return (
         <>
-        <Header title={message}/>
-        <div className="columns">
-            <div className="column"></div>
-            <div className="column m-5 is-two-thirds">
-                {
-                    !token ? (
-                        <div className="columns">
-                            <MoveButtons />
-                        </div>
-                    ) : (
-                        <p>Is protect page</p>
-                    )
-                }
-            </div>
-            <div className="column"></div>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Auth />} />
+                <Route path="/application_form" element={<ApplicationForm />} />
+            </Routes>
+        </BrowserRouter>
         </>
     );
 }

@@ -1,8 +1,8 @@
 
 import React, {useContext, useState} from  "react";
 
-import ErrorMessage from "./ErrorMessage";
-import { UserConetext } from "../context/UserContext";
+import ErrorMessage from "../ErrorMessage";
+import { UserConetext } from "../../context/UserContext";
 
 
 const Login = () =>{

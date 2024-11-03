@@ -1,12 +1,10 @@
 import uvicorn
-from fastapi import FastAPI, Request
-from fastapi.security import OAuth2PasswordBearer
-from fastapi.staticfiles import StaticFiles
-from starlette.responses import RedirectResponse
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from profile.routers import router as profile_router
 from auth.routers import router as auth_router
+from profile.routers import router as profile_router
+from application_form.routers import router as application_form_router
 
 app = FastAPI()
 
@@ -24,6 +22,7 @@ async def root():
 
 app.include_router(profile_router)
 app.include_router(auth_router)
+app.include_router(application_form_router)
 
 
 if __name__ == "__main__":
