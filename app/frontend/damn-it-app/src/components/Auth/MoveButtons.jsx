@@ -22,10 +22,10 @@ const MoveButtons = () => {
     return (
         <>  
         <div className="buttons-move">
-            <button type="button" className="button" onClick={handleLogin} id="LoginBut">
+            <button type="button" className="button-move" onClick={handleLogin} id="LoginBut">
                     Войти
             </button>
-            <button type="button" className="button" onClick={handleRegister} id="RegisterBut">
+            <button type="button" className="button-move" onClick={handleRegister} id="RegisterBut">
                 Зарегестрироваться
             </button>
         </div>

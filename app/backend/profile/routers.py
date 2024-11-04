@@ -10,6 +10,5 @@ router = APIRouter(
 
 
 @router.get('/me', response_model=Profile)
-async def get_user_data(request: Request, user: Profile = Depends(get_current_user)):
+async def get_user_data(user: Profile = Depends(get_current_user)):
     return user
-

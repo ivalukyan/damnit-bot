@@ -13,7 +13,6 @@
     border: 2px solid #303131;
     border-radius: 14px;
     padding: 3px;
-    margin: 30px;
 }
 
 @keyframes fadeUp {
@@ -27,11 +26,12 @@
     }
 }
 
-.button{
+.button-move{
     width: 100%;
     color: #fff;
     background: #303131;
     font-size: 18px;
+    font-weight: 500;
     padding: 8px;
     border: none;
     outline: none;
@@ -86,4 +86,106 @@
 
 .input-radio{
     margin-right: 5px;
+}
+
+.card{
+    padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.65) 0 5px 15px 0;
+    font-weight: 500;
+    animation-fill-mode: forwards;
+    animation: fadeUp 0.8s ease-in-out;
+}
+
+.news-buttons{
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+#NewsInfoBut{
+    width: 100%;
+}
+
+#NewsSaveBut{
+    width: 100%;
+}
+
+.header{
+    display: flex;
+    width: 100%;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.title-header{
+    font-size: 25px;
+    font-weight: 800;
+}
+
+#LogoutBut{
+    padding: 6px;
+    position: absolute;
+    right: 0;
+    margin-right: 15px;
+}
+
+.user-icon{
+    position: absolute;
+    left: 0;
+    margin-top: 5px;
+    margin-left: 15px;
+    color: #13c5c5;
+}
+
+#BackSvg{
+    background-color: #2a2b2c;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.subscription{
+    display: flex;
+    font-size: 18px;
+    gap: 35px;
+    align-items: center;
+}
+
+#sub-status{
+    color: #000;
+    background-color: #13c5c5;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+#sub-disable{
+    position: absolute;
+    right: 20px;
+    padding: 2px;
+    font-size: 18px;
+}
+
+#UpdateButProfile{
+    margin-top: 15px;
+    width: 100%;
+}
+
+.modal{
+    max-width: 97%;
+    padding: 15px;
+    animation: fadeUp 0.8s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.modal-background{
+    max-width: 100%;
+}
+
+.modal-card header{
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px 0;
+}
+
+.modal-card section{
+    font-size: 17px;
 }

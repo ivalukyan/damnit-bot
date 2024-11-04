@@ -18,7 +18,7 @@ app.add_middleware(
 
 @app.get("/api")
 async def root():
-    return {"message": "It`s API page"}
+    return {"message": "DamnIT Bot"}
 
 app.include_router(profile_router)
 app.include_router(auth_router)

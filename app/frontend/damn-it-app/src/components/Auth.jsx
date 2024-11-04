@@ -3,6 +3,7 @@ import Header from "../components/Auth/Header";
 import { UserConetext } from "../context/UserContext";
 import MoveButtons from "../components/Auth/MoveButtons";
 import "../App.css"
+import News from "./News";
 
 
 const Auth = () => {
@@ -42,7 +43,7 @@ const Auth = () => {
                             <MoveButtons />
                         </div>
                     ) : (
-                        <p>Is protect page</p>
+                        <News />
                     )
                 }
             </div>
