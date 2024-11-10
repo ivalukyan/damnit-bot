@@ -21,6 +21,7 @@ export const UserProvider = (props) => {
             if (!response.ok){
                 setToken(null);
             }
+
             localStorage.setItem("awesomeLeadsToken", token);
         };
         fetchUser();

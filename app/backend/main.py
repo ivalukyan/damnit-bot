@@ -5,6 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from auth.routers import router as auth_router
 from profile.routers import router as profile_router
 from application_form.routers import router as application_form_router
+from news.routers import router as news_router
+
 
 app = FastAPI()
 
@@ -23,6 +25,7 @@ async def root():
 app.include_router(profile_router)
 app.include_router(auth_router)
 app.include_router(application_form_router)
+app.include_router(news_router)
 
 
 if __name__ == "__main__":

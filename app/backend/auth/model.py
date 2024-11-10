@@ -10,6 +10,8 @@ class UserSchemas(BaseModel):
     fullname: str | None = None
     phone: str
     email: str | None = None
+    access_token: str | None = None
+    msg: str | None = None
 
 
 class Profile(BaseModel):
