@@ -10,7 +10,7 @@ const Header = ({title}) => {
     };
 
     return (
-        <div className="header" id="HeaderId">
+        <nav className="navbar" id="HeaderId">
             {token && (<a className="user-icon" href="/profile">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
@@ -19,7 +19,7 @@ const Header = ({title}) => {
                 </a>)}
             <h4 className="title-header" id="TitleHeader">{title}</h4>
             {token && (<button className="button is-danger" id="LogoutBut" onClick={handleLogout}>Выйти</button>)}
-        </div>
+        </nav>
     );
 };
 

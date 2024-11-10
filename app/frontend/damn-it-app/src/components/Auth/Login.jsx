@@ -27,7 +27,7 @@ const Login = () =>{
         const data = await response.json();
 
         if (!response.ok){
-            setErrorMessage("Token invalid");
+            setErrorMessage("Неправильный номер при вводе");
         } else {
             setToken(data.access_token);
         }
@@ -42,16 +42,17 @@ const Login = () =>{
         <div className="column">
             <form className="box" onSubmit={handleSubmit}>
                 <h1 className="title has-text-centered">Авторизация</h1>
-                <div className="field">
+                <div className="mb-4"></div>
+                <div className="mb-3">
                     <label className="label">Номер телефона</label>
                     <div className="control">
-                        <input 
-                        type="text"
-                        placeholder="+7 9ХХ ХХХ ХХ ХХ"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="input"
-                        required
+                        <input
+                            type="text"
+                            placeholder="+7 9ХХ ХХХ ХХ ХХ"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            className="input"
+                            required
                         />
                     </div>
                 </div>

@@ -1,13 +1,16 @@
 import React, { useContext, useState } from "react";
-import { UserConetext } from "../../context/UserContext";
+import {UserConetext} from "../../context/UserContext";
 
-const UserData = () =>{
-    const [token] = useContext(UserConetext);
+const UserData = () => {
+    // State declarations
     const [fullname, setFullname] = useState("");
     const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [getName, setGetName] = useState("");
-    const [getEmail, setGetEmail] = useState("");
+    const [token] = useContext(UserConetext);
+    const [userName, setUserName] = useState("");
+    const [userPhone, setUserPhone] = useState("");
+    const [userEmail, setUserEmail] = useState("");
+    const [isActive, setIsActive] = useState(true);
+    const [isActiveNotification, setIsActiveNotification] = useState(false);
 
 
     const getUser = async () => {
@@ -15,102 +18,118 @@ const UserData = () =>{
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
+                Authorization: `Bearer ${token}`,
             },
         };
 
-        const response = await fetch("/user/me", requestOptions);
-        const data = await response.json();
-        if (response.ok){
-            console.log(data);
-            setGetName(data.fullname);
-            setGetEmail(data.email);
-            setPhone(data.phone);
+        try {
+            const response = await fetch("/user/me", requestOptions);
+            if (response.ok) {
+                const data = await response.json();
+                setUserName(data.fullname);
+                setUserPhone(data.phone);
+                setUserEmail(data.email);
+            } else {
+                console.error("Failed to fetch user data");
+            }
+        } catch (error) {
+            console.error("Error fetching user data", error);
         }
-    }
+    };
 
-    const updateUser = async () => {
+    const removeNotification = () => {
+        setIsActiveNotification(false);
+    };
+
+
+    const sendUpdateData = async () => {
         const requestOptions = {
-            method: "PUT",
-            headers: {"Content-Type" : "application/json"},
+            method: 'PUT',
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                fullname: fullname,
-                email: email,
-                phone: phone
+                fullname: fullname || userName,
+                email: email || userEmail,
+                phone: userPhone,
             })
+        };
+
+        try {
+            const response = await fetch("/user/update", requestOptions);
+            if (response.ok) {
+                const data = await response.json();
+                setUserName(data.fullname);
+                setUserEmail(data.email);
+                setIsActive(true);
+                setIsActiveNotification(true);
+            } else {
+                console.error("Failed to update user data");
+            }
+        } catch (error) {
+            console.error("Error updating user data", error);
         }
+    };
 
-        const response = await fetch("/user/update", requestOptions);
-        const data = await response.json();
-        if (response.ok){
-            alert("Данные обновлены")
-            console.log(data)
-        } else {
-            console.log(data)
-        }
-    }
 
-    const onClickUpdate = (e) => {
-        e.preventDefault();
+    const updateUser = () => {
+        setIsActive(!isActive);
+    };
 
-        document.getElementById('fullnameId').disabled = false;
-        document.getElementById('emailId').disabled = false;
-        const updBut = document.getElementById('UpdateButProfile')
-        updBut.textContent = "Сохранить";
-        updBut.className = "button is-success";
-        updBut.onClick = onClickSave;
-    }
-
-    const onClickSave = (e) => {
-        e.preventDefault()
-        updateUser();
-    }
 
     getUser();
 
     return (
         <>
-        <div className="column"></div>
-        <div className="column">
-            <div className="card" id="PrifileDataId">
-                <div className="field">
-                    <label className="label">ФИО</label>
-                    <div className="control">
-                        <input
-                        className="input"
-                        id="fullnameId"
-                        value={fullname}
-                        placeholder={getName}
-                        onChange={(e) => setFullname(e.target.value)}
-                        required
-                        disabled
-                        />
+            <div className="column"></div>
+            {isActiveNotification && (
+                <div className="notification is-success" id="NotificationDiv">
+                    <button className="delete" onClick={removeNotification}></button>
+                    <p>Профиль успешно обновлен</p>
+                </div>
+            )}
+            <div className="column">
+                <div className="card">
+                    <div className="field">
+                        <label className="label">ФИО</label>
+                        <div className="control">
+                            <input
+                                id="fullnameInput"
+                                type="text"
+                                className="input"
+                                placeholder={userName}
+                                value={fullname}
+                                onChange={(e) => setFullname(e.target.value)}
+                                required
+                                disabled={isActive}
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className="field">
-                    <label className="label">E-mail</label>
-                    <div className="control">
-                        <input
-                        className="input"
-                        id="emailId"
-                        value={email}
-                        placeholder={getEmail}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        disabled
-                        />
+                    <div className="field">
+                        <label className="label">E-mail</label>
+                        <div className="control">
+                            <input
+                                id="emailInput"
+                                type="email"
+                                className="input"
+                                placeholder={userEmail}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                disabled={isActive}
+                            />
+                        </div>
                     </div>
+                    <div className="subscription">
+                        <div>Подписка:</div>
+                        <div id="sub-status">Активна</div>
+                        <button className="button is-danger" id="sub-disable">Отменить</button>
+                    </div>
+                    <button className="button" id="UpdateButProfile" onClick={isActive ? updateUser : sendUpdateData}>
+                        {isActive ? "Изменить" : "Сохранить"}
+                    </button>
                 </div>
-                <div className="subscription">
-                    <div>Подписка: </div>
-                    <div id="sub-status">Активна</div>
-                    <button className="button is-danger" id="sub-disable">Отменить</button>
-                </div>
-                <button className="button" id="UpdateButProfile" onClick={onClickUpdate}>Изменить</button>
             </div>
-        </div>
         </>
-    )
-}
+    );
+};
 
-export default UserData
+export default UserData;

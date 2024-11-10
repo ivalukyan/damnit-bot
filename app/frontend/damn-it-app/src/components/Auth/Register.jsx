@@ -22,7 +22,7 @@ const Register = () => {
         const data = await response.json();
 
         if (!response.ok){
-            setErrorMessage("User already exist");
+            setErrorMessage("Вы уже зарегистрированны");
         } else{
             setToken(data.access_token);
         }
@@ -37,7 +37,8 @@ const Register = () => {
         <div className="column">
             <form className="box" onSubmit={handleSubmit}>
                 <h1 className="title has-text-centered">Регистрация</h1>
-                <div className="field">
+                <div className="mb-4"></div>
+                <div className="mb-3">
                     <label className="label">ФИО</label>
                     <div className="control">
                         <input 
@@ -50,7 +51,7 @@ const Register = () => {
                         />
                     </div>
                 </div>
-                <div className="field">
+                <div className="mb-3">
                     <label className="label">Номер телефона</label>
                     <div className="control">
                         <input 
@@ -63,7 +64,7 @@ const Register = () => {
                         />
                     </div>
                 </div>
-                <div className="field">
+                <div className="mb-3">
                     <label className="label">E-mail</label>
                     <div className="control">
                         <input 
