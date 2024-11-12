@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import {UserConetext} from "../../context/UserContext";
+import UserNews from "./UserNews";
 
 const UserData = () => {
     // State declarations
@@ -127,6 +128,9 @@ const UserData = () => {
                         {isActive ? "Изменить" : "Сохранить"}
                     </button>
                 </div>
+            </div>
+            <div className="column">
+                <UserNews />
             </div>
         </>
     );

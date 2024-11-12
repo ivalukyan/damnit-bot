@@ -6,8 +6,9 @@ const News = () => {
     const [isModalActive, setModalActive] = useState(false);
     const [selectedNews, setSelectedNews] = useState(null);
     const [token, setToken] = useContext(UserConetext);
-    const [userId, setUserId] = useState("");
+    const [userId, setUserId] = useState(localStorage.getItem("awesomeUserId"));
     const [notification, setNotification] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
 
     const toggleModal = (newsItem = null) => {
         setModalActive(!isModalActive);
@@ -17,6 +18,10 @@ const News = () => {
     const closeModal = () => {
         setNotification(false);
     }
+
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value.toLowerCase());
+    };
 
     const handleSaveNews = async (news_id) => {
 
@@ -52,9 +57,10 @@ const News = () => {
 
         if (!response.ok) {
             setToken(null);
+            setUserId(null);
         } else {
             const data = await response.json();
-            setUserId(data.id);
+            localStorage.setItem("awesomeUserId", data.id);
         }
     };
 
@@ -81,12 +87,26 @@ const News = () => {
 
     return (
         <>
+            <div className="control-search">
+                <input
+                    type="text"
+                    id="searchFieldId"
+                    className="input"
+                    placeholder="Поиск"
+                    autoComplete="off"
+                    required
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                />
+            </div>
             {notification && (<div className="notification is-info">
                 <button className="delete" onClick={closeModal}></button>
                 Статья сохранена.
             </div>)}
             <div className="column" id="main">
-                {news.map((el) => (
+                {news
+                .filter((el) => el.title.toLowerCase().includes(searchTerm))
+                .map((el) => (
                     <div key={el.id} className="card">
                         <h4 className="title is-4">{el.title}</h4>
                         <div className="mb-5">{el.short_info}</div>
