@@ -59,7 +59,7 @@ const Company = () => {
                     required
                     />
                 </div>
-                <button className="button" type="sumbit">Отправить</button>
+                <button className="button is-primary" type="sumbit">Отправить</button>
             </form>
         </div>
     );

@@ -25,10 +25,10 @@ const ApplicationForm = () => {
         <div className="column"></div>
         <h1 className="title has-text-centered">Оформление заявки</h1>
         <div className="buttons-move">
-            <button type="button" className="button" onClick={handleLogin} id="LoginBut">
+            <button type="button" className="button-move" onClick={handleLogin} id="LoginBut">
                     Частное лицо
             </button>
-            <button type="button" className="button" onClick={handleRegister} id="RegisterBut">
+            <button type="button" className="button-move" onClick={handleRegister} id="RegisterBut">
                     Компания
             </button>
         </div>

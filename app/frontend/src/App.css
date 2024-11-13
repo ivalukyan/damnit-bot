@@ -1,5 +1,5 @@
 
-.buttons-move{
+.buttons-move {
     display: flex;
     gap: 5px;
     border: 2px solid #303131;
@@ -13,13 +13,13 @@
         opacity: 0;
         transform: translateY(20px);
     }
-    100%{
+    100% {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-.button-move{
+.button-move {
     width: 100%;
     color: #fff;
     background: #303131;
@@ -33,26 +33,25 @@
 }
 
 
-
-#RegisterBut{
+#RegisterBut {
     background-color: transparent;
 }
 
-.box{
+.box {
     box-shadow: none;
     opacity: 0;
     animation: fadeUp 0.8s ease-in-out;
     animation-fill-mode: forwards;
 }
 
-.input{
+.input {
     border: none;
     background: #303131;
     font-size: 16px;
     font-weight: 500;
 }
 
-.button-submit{
+.button-submit {
     background-color: #484949;
     color: #000;
     padding: 7px;
@@ -64,29 +63,29 @@
     border-radius: 10px;
 }
 
-.label{
+.label {
     font-size: 18px;
     font-weight: 600;
 }
 
-.control{
+.control {
     width: 100%;
     padding: 3px;
 }
 
-.radio{
-    font-size: 18px;
-    font-weight: 500;
-    margin-left: 20px;
-    margin-right: 50px;
-    transform: scale(1.5);
-}
+/*.radio {*/
+/*    font-size: 18px;*/
+/*    font-weight: 500;*/
+/*    margin-left: 20px;*/
+/*    margin-right: 50px;*/
+/*    transform: scale(1.5);*/
+/*}*/
 
-.input-radio{
+.input-radio {
     margin-right: 5px;
 }
 
-.card{
+.card {
     padding: 15px;
     background: #1a1b1b;
     box-shadow: rgba(0, 0, 0, 0.65) 0 5px 15px 0;
@@ -96,7 +95,7 @@
     animation: fadeUp 0.8s ease-in-out;
 }
 
-.news-buttons{
+.news-buttons {
     display: flex;
     gap: 15px;
     width: 100%;
@@ -107,13 +106,12 @@
     justify-content: center;
 }
 
-#SaveNewsBtn{
+#SaveNewsBtn {
     padding: 7px;
 }
 
 
-
-.navbar{
+.navbar {
     display: flex;
     width: 100%;
     padding: 8px;
@@ -122,19 +120,19 @@
     gap: 15px;
 }
 
-.title-header{
+.title-header {
     font-size: 25px;
     font-weight: 800;
 }
 
-#LogoutBut{
+#LogoutBut {
     padding: 6px;
     position: absolute;
     right: 0;
     margin-right: 15px;
 }
 
-.user-icon{
+.user-icon {
     position: absolute;
     left: 0;
     margin-top: 5px;
@@ -142,34 +140,34 @@
     color: #13c5c5;
 }
 
-#BackSvg{
+#BackSvg {
     background-color: #2a2b2c;
     border-radius: 5px;
     padding: 2px;
 }
 
-.subscription{
+.subscription {
     display: flex;
     font-size: 18px;
     gap: 35px;
     align-items: center;
 }
 
-#sub-status{
+#sub-status {
     color: #000;
     background-color: #13c5c5;
     border-radius: 5px;
     padding: 2px;
 }
 
-#sub-disable{
+#sub-disable {
     position: absolute;
     right: 20px;
     padding: 2px;
     font-size: 18px;
 }
 
-#UpdateButProfile{
+#UpdateButProfile {
     margin-top: 25px;
     width: 100%;
 }
@@ -201,51 +199,127 @@
     animation: fadeUp 0.8s ease-in-out forwards;
 }
 
-.btn-close{
+.btn-close {
     position: absolute;
     right: 30px;
 }
 
-.modal-body{
+.modal-body {
     margin: 15px 0 15px 0;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.6);
 }
 
-.btn-info{
+.btn-info {
     font-size: 16px;
     font-weight: 500;
 }
 
-.card .h4{
+.card .h4 {
     color: #fff;
 }
 
-.column{
+.column {
     margin-top: 35px
 }
 
-.modal-card-title{
+.modal-card-title {
     font-size: 20px;
     font-weight: 500;
 }
 
-.is-primary{
+.is-primary {
     padding: 7px;
     width: 100%;
 }
 
-.notification{
+.notification {
     margin: 0 20px 0 20px;
 }
 
-.notification{
+.notification {
     animation: fadeUp 0.8s ease-in-out;
     animation-fill-mode: forwards;
 }
 
-.control-search{
+.control-search {
     margin: 0 15px 0 15px;
     animation: fadeUp 0.6s ease-in;
+}
+
+.label-radio {
+    display: flex;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.375em;
+
+    /*&:focus-within {*/
+    /*    outline: .125em solid #00d1b2;*/
+    /*}*/
+
+
+    .radio-input {
+        position: absolute;
+        left: -9999px;
+
+        &:checked + span {
+            background-color: mix(#1a1b1b, #00d1b2, 84%);
+
+            &:before {
+                box-shadow: inset 0 0 0 0.4375em #00d1b2;
+            }
+        }
+    }
+
+    .text-radio {
+        display: flex;
+        align-items: center;
+        padding: 0.375em 0.75em 0.375em 0.375em;
+        border-radius: 99em;
+        transition: 0.25s ease;
+
+        &:hover {
+            background-color: mix(#1a1b1b, #00d1b2, 84%);
+        }
+
+        &:before {
+            display: flex;
+            flex-shrink: 0;
+            content: "";
+            background-color: #1a1b1b;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+            margin-right: 0.375em;
+            transition: 0.25s ease;
+            box-shadow: inset 0 0 0 0.125em #00d1b2;
+        }
+    }
+}
+
+.card-header{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.card-body{
+    font-size: 20px;
+    margin: 15px 0 15px 0;
+}
+
+.card-body p{
+    background-color: #2a2b2c;
+    border-radius: 8px;
+    padding: 5px;
+    width: 35%;
+}
+
+.card-buttons{
+    display: flex;
+    align-items: center;
+    gap: 25px;
 }
