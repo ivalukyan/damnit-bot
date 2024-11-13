@@ -1,11 +1,11 @@
-from uuid import uuid4
+from uuid import uuid4, UUID
 
+from fastapi.params import Depends
 from sqlalchemy import Column, Integer, String, DateTime, UUID, Boolean, LargeBinary, ForeignKey
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy.orm import sessionmaker, relationship, Session
 from sqlalchemy.orm import declarative_base
-
 
 db_url = f"postgresql://postgres:postgres@localhost:5432/damnit_bot"
 
