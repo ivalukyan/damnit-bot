@@ -16,3 +16,4 @@ alembic
 alembic.ini
 
 .venv
+node_modules
