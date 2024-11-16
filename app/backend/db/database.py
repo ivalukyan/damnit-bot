@@ -1,6 +1,7 @@
 from uuid import uuid4, UUID
 
 from fastapi.params import Depends
+from pygments.lexer import default
 from sqlalchemy import Column, Integer, String, DateTime, UUID, Boolean, LargeBinary, ForeignKey
 
 from sqlalchemy import create_engine
@@ -40,6 +41,14 @@ class News(Base):
     short_info = Column(String, nullable=True)
     info = Column(String, nullable=True)
     users = relationship("Users_News", backref="news")
+
+
+class Store(Base):
+    __tablename__ = 'store'
+    id = Column(UUID, primary_key=True, default=uuid4)
+    title = Column(String, nullable=True)
+    short_info = Column(String, nullable=True)
+    info = Column(String, nullable=True)
 
 
 if __name__ == '__main__':
