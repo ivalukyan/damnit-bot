@@ -1,11 +1,9 @@
-from uuid import uuid4, UUID
+from uuid import uuid4
 
-from fastapi.params import Depends
-from sqlalchemy import Column, Integer, String, DateTime, UUID, Boolean, LargeBinary, ForeignKey
-
+from sqlalchemy import (Column, String, UUID, ForeignKey, BigInteger, ARRAY)
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, relationship, Session
 from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import sessionmaker, relationship
 
 db_url = f"postgresql://postgres:postgres@localhost:5432/damnit_bot"
 
@@ -40,6 +38,13 @@ class News(Base):
     short_info = Column(String, nullable=True)
     info = Column(String, nullable=True)
     users = relationship("Users_News", backref="news")
+
+
+class Chat(Base):
+    __tablename__ = 'chat'
+    id = Column(UUID, primary_key=True, default=uuid4)
+    telegram_id = Column(BigInteger, nullable=False)
+    messages = Column(ARRAY(String), nullable=True)
 
 
 if __name__ == '__main__':

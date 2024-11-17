@@ -3,6 +3,12 @@ import React, {useEffect, useState} from 'react';
 
 const Store = () => {
     const [header, setHeader] = useState("");
+    const [isModalActive, setModalActive] = useState(false);
+
+
+    const toggleModal = (newsItem = null) => {
+        setModalActive(!isModalActive);
+    };
 
     const getHeader = async () => {
         const requestOptions = {
@@ -46,11 +52,46 @@ const Store = () => {
                         <p>10000 руб.</p>
                     </div>
                     <div className="card-buttons">
-                        <button className="button">Подробнее</button>
-                        <button className="button">Сделать заказ</button>
+                        <button
+                            type="button"
+                            className="button"
+                            onClick={() => toggleModal()}
+                        >Подробнее</button>
+                        <button
+                            type="button"
+                            className="button is-primary"
+                        >Сделать заказ</button>
                     </div>
                 </div>
             </div>
+            {isModalActive && (
+                <div className="modal-overlay" onClick={() => toggleModal()}>
+                    <div
+                        className="modal-content animated"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="modal-head">
+                            <h2 className="modal-card-title">Bot</h2>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                onClick={() => toggleModal()}
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div className="modal-body">
+                            Описание бота
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button"
+                                    className="button is-primary"
+                                    id="SaveNewsBtn">
+                                Сделать заказ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     )
 }

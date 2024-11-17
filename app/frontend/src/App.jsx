@@ -6,6 +6,7 @@ import ApplicationForm from "./components/ApplicationForm";
 import "./App.css"
 import Profile from "./components/Profile";
 import Store from "./components/Store";
+import Chat from "./components/Chat";
 
 
 
@@ -19,6 +20,7 @@ const App = () => {
                 <Route path="/application_form" element={<ApplicationForm />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/store" element={<Store />} />
+                <Route path="/chat" element={<Chat />} />
             </Routes>
         </BrowserRouter>
         </>
