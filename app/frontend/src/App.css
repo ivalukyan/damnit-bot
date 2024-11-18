@@ -308,14 +308,15 @@
 
 .card-body{
     font-size: 20px;
-    margin: 15px 0 15px 0;
+    padding: 15px 0 ;
 }
 
 .card-body p{
     background-color: #2a2b2c;
     border-radius: 8px;
     padding: 5px;
-    width: 35%;
+    text-align: center;
+    width: 8rem;
 }
 
 .card-buttons{
@@ -359,10 +360,11 @@
     word-wrap: break-word;
     font-size: 18px;
     font-weight: 500;
-    display: block;
-    width: fit-content;
+    display: flex;
+    flex-direction: column;
     position: relative;
     overflow-y: auto;
+    max-height: calc(100vh - 145px);
 }
 
 /* хром, сафари */
@@ -373,9 +375,15 @@
 
 
 .chat-message{
-    background-color: #303131;
-    padding: 5px;
+    display: flex;
+    padding: 3px;
     margin-top: 10px;
     margin-left: auto;
+    width: 100%;
+}
+
+.chat-message p{
+    background-color: #303131;
+    padding: 5px;
     border-radius: 10px 10px 10px 0;
 }

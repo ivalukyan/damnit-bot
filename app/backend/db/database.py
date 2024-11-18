@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from pygments.lexer import default
 from sqlalchemy import (Column, String, UUID, ForeignKey, BigInteger, ARRAY)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
@@ -38,6 +39,14 @@ class News(Base):
     short_info = Column(String, nullable=True)
     info = Column(String, nullable=True)
     users = relationship("Users_News", backref="news")
+
+
+class Store(Base):
+    __tablename__ = "store"
+    id = Column(UUID, primary_key=True, default=uuid4)
+    title = Column(String, nullable=True)
+    short_info = Column(String, nullable=True)
+    info = Column(String, nullable=True)
 
 
 class Chat(Base):

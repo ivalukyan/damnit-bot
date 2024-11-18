@@ -18,6 +18,5 @@ router = APIRouter(
 async def get_list_magazin(db: Session = Depends(get_db_session)):
 
     all_store = db.query(Store).all()
-    print(all_store)
 
     return all_store

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ChatHeader from "./Chat/ChatHeader";
 
 const Chat = () => {
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
+    const chatMainRef = useRef(null);
 
     const handleKeyPress = (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
@@ -17,16 +18,22 @@ const Chat = () => {
     const sendMessage = (newMessage) => {
         setMessages([...messages, newMessage]);
         setMessage("");
+        setTimeout(() => {
+            if (chatMainRef.current) {
+                chatMainRef.current.scrollTop = chatMainRef.current.scrollHeight;
+            }
+        }, 0);
     };
 
     return (
         <>
             <ChatHeader />
-            <div className="chat-container">
+            <div className="chat-container" ref={chatMainRef}>
                 <div className="chat-body">
-                    {messages.map((msg, index) => (
+                    {messages
+                    .map((msg, index) => (
                         <div key={index} className="chat-message">
-                            {msg}
+                            <p>{msg}</p>
                         </div>
                     ))}
                 </div>
