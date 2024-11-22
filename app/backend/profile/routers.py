@@ -1,14 +1,11 @@
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 
 from auth.dependencies import get_current_user, get_db_session
-from auth.model import Profile
-
 from auth.dependencies import get_user
-from news.schemas import User_News
-from profile.schemas import UpdateProfileSchema, UserNewsSchemas, NewsSchemas
-from sqlalchemy.orm import Session
+from auth.model import Profile
 from db.database import Users, News, Users_News
-
+from profile.schemas import UpdateProfileSchema, UserNewsSchemas, NewsSchemas
 
 router = APIRouter(
     tags=["Профиль"],

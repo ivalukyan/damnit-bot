@@ -56,6 +56,14 @@ class Chat(Base):
     messages = Column(ARRAY(String), nullable=True)
 
 
+class Admin(Base):
+    __tablename__ = 'admins'
+    id = Column(UUID, primary_key=True, default=uuid4)
+    fullname = Column(String, nullable=True)
+    phone = Column(String, nullable=True)
+    email = Column(String, nullable=True)
+
+
 if __name__ == '__main__':
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
