@@ -7,6 +7,7 @@ from profile.routers import router as profile_router
 from application_form.routers import router as application_form_router
 from news.routers import router as news_router
 from store.routers import router as store_router
+from admin.routers import router as admin_router
 
 
 app = FastAPI()
@@ -28,6 +29,7 @@ app.include_router(auth_router)
 app.include_router(application_form_router)
 app.include_router(news_router)
 app.include_router(store_router)
+app.include_router(admin_router)
 
 
 if __name__ == "__main__":
