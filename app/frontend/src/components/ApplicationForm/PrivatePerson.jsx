@@ -15,7 +15,7 @@ const PrivatePerson = () => {
             contact: contact,
             email: email || ""
         }
-        
+
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -23,7 +23,7 @@ const PrivatePerson = () => {
         };
 
         const response = await fetch("/application_form/person", requestOptions);
-        if (!response.ok){
+        if (!response.ok) {
             console.log("Плохой запрос");
         } else {
             const data = await response.json()
@@ -42,67 +42,71 @@ const PrivatePerson = () => {
                 <div className="field">
                     <label className="label">ФИО</label>
                     <input
-                    type="text"
-                    className="input"
-                    placeholder="Как вас зовут?"
-                    value={fullname}
-                    onChange={(e) => {setFullname(e.target.value)}}
-                    autoComplete="off"
-                    required
+                        type="text"
+                        className="input"
+                        placeholder="Как вас зовут?"
+                        value={fullname}
+                        onChange={(e) => {
+                            setFullname(e.target.value)
+                        }}
+                        autoComplete="off"
+                        required
                     />
                 </div>
                 <div className="field">
                     <label className="label">Номер телефона</label>
                     <input
-                    type="text"
-                    className="input"
-                    placeholder="+7 9ХХ ХХХ ХХ ХХ"
-                    value={phone}
-                    onChange={(e) => {setPhone(e.target.value)}}
-                    autoComplete="off"
-                    required
+                        type="text"
+                        className="input"
+                        placeholder="+7 9ХХ ХХХ ХХ ХХ"
+                        value={phone}
+                        onChange={(e) => {
+                            setPhone(e.target.value)
+                        }}
+                        autoComplete="off"
+                        required
                     />
                 </div>
                 <div className="control">
                     <label className="label">Где удобнее связаться?</label>
-                    <label className="radio">
+                    <label className="label-radio">
                         <input
-                        type="radio"
-                        className="input-radio"
-                        id="constactId"
-                        value="telegram"
-                        checked={contact === "telegram"}
-                        name="social-contact"
-                        onChange={(e) => setContact(e.target.value)}
+                            className="radio-input"
+                            type="radio"
+                            name="radio"
+                            value="telegram"
+                            checked={contact === "telegram"}
+                            onChange={(e) => setContact(e.target.value)}
                         />
-                        Telegram
+                        <span className="text-radio">Telegram</span>
                     </label>
-                    <label className="radio">
+                    <label className="label-radio">
                         <input
-                        type="radio"
-                        className="input-radio"
-                        id="constactId"
-                        value="whatsapp"
-                        checked = {contact === "whatsapp"}
-                        name="social-contact"
-                        onChange={(e) => setContact(e.target.value)}
+                            className="radio-input"
+                            type="radio"
+                            name="radio"
+                            value="whatsapp"
+                            checked={contact === "whatsapp"}
+                            onChange={(e) => setContact(e.target.value)}
                         />
-                        Whatsapp
+                        <span className="text-radio">WhatsApp</span>
                     </label>
                 </div>
                 <div className="field">
                     <label className="label">Электронная почта(необязательно)</label>
                     <input
-                    type="email"
-                    className="input"
-                    placeholder="E-mail"
-                    value={email}
-                    onChange={(e) => {setEmail(e.target.value)}}
-                    autoComplete="off"
-                    required
+                        type="email"
+                        className="input"
+                        placeholder="E-mail"
+                        value={email}
+                        onChange={(e) => {
+                            setEmail(e.target.value)
+                        }}
+                        autoComplete="off"
+                        required
                     />
                 </div>
-                <button className="button" type="sumbit">Отправить</button>
+                <button className="button is-primary" type="sumbit">Отправить</button>
             </form>
         </div>
     );
