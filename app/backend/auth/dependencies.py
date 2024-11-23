@@ -40,6 +40,13 @@ async def authenticate_user(db_session: Session, phone: str):
     return user
 
 
+async def authenticate_admin(db_session: Session, phone: str):
+    admin = await get_admin(db_session, phone)
+    if not admin:
+        return None
+    return admin
+
+
 async def get_current_user(db_session: Session = Depends(get_db_session), token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,

@@ -3,7 +3,7 @@ from fastapi.params import Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
-from auth.dependencies import authenticate_user, get_db_session, get_user
+from auth.dependencies import authenticate_user, get_db_session, get_user, authenticate_admin
 from auth.model import Token, UserSchemas
 from auth.utils import create_access_token
 from db.database import Users
@@ -22,7 +22,8 @@ async def auth():
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(),
                                  db_session: Session = Depends(get_db_session)) -> Token:
     user = await authenticate_user(db_session, form_data.username)
-    if not user:
+    admin = await authenticate_admin(db_session, form_data.username)
+    if not user and not admin:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
