@@ -10,6 +10,6 @@ router = APIRouter(
 )
 
 
-@router.get("/", response_model=AdminSchemas)
+@router.get("/me", response_model=AdminSchemas)
 async def get_admin(admin: AdminSchemas = Depends(get_current_admin)):
     return admin

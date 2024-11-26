@@ -6,7 +6,7 @@ import "./App.css"
 import Profile from "./components/Profile";
 import Store from "./components/Store";
 import Chat from "./components/Chat";
-
+import Admin from "./components/Admin";
 
 
 const App = () => {
@@ -20,6 +20,7 @@ const App = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/store" element={<Store />} />
                 <Route path="/chat" element={<Chat />} />
+                <Route path="/admin" element={<Admin/>} />
             </Routes>
         </BrowserRouter>
         </>

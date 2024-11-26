@@ -16,9 +16,11 @@ export const UserProvider = (props) => {
                 },
             };
 
-            const response = await fetch("/user/me", requestOptions);
+            const userResponse = await fetch("/user/me", requestOptions);
 
-            if (!response.ok){
+            const adminResponse = await fetch("/admin/me", requestOptions);
+
+            if (!userResponse.ok && !adminResponse.ok){
                 setToken(null);
             }
 
