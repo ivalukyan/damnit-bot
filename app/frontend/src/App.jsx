@@ -7,6 +7,9 @@ import Profile from "./components/Profile";
 import Store from "./components/Store";
 import Chat from "./components/Chat";
 import Admin from "./components/Admin";
+import ListUsers from "./components/Admin/ListUsers";
+import NewsTape from "./components/Admin/NewsTape";
+import StoreTape from "./components/Admin/StoreTape";
 
 
 const App = () => {
@@ -21,6 +24,9 @@ const App = () => {
                 <Route path="/store" element={<Store />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/admin" element={<Admin/>} />
+                <Route path="/list_users" element={<ListUsers />} />
+                <Route path="/admin_news" element={<NewsTape />} />
+                <Route path="/admin_store" element={<StoreTape />} />
             </Routes>
         </BrowserRouter>
         </>

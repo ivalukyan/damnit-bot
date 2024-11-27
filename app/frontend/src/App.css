@@ -432,11 +432,17 @@
 
 .mini-news-card{
     display: flex;
-    flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.5) 0 5px 15px 0;
     border-radius: 10px;
-    color: #ffffff;
+    color: #abb1bf;
     padding: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.mini-news-card svg{
+    width: 28px;
+    height: 28px;
 }
 
 .mini-news-card img{
@@ -450,4 +456,30 @@
     font-size: 24px;
     font-weight: 600;
     text-align: center;
+}
+
+#UserUpdateButton{
+    margin-top: 10px;
+}
+
+#UserDeleteButton{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.navbar{
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
+}
+
+.navbar-brand{
+    position: absolute;
+    left: 10px;
+    color: #ffffff;
+    padding: 8px 0;
+}
+
+.navbar-brand svg{
+    padding: 6px;
+    background-color: #2a2b2c;
+    border-radius: 10px;
 }
