@@ -4,8 +4,12 @@ import Login from "../Auth/Login";
 
 const AdminLogin = () => {
     return (
-        <>  
-        <Login/>
+        <>
+            <div className="column"></div>
+            <div className="column"></div>
+            <div className="column">
+                <Login/>
+            </div>
         </>
     );
 }
