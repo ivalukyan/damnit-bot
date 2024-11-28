@@ -18,14 +18,14 @@ export const UserProvider = (props) => {
 
             const userResponse = await fetch("/user/me", requestOptions);
 
-            const adminResponse = await fetch("/admin/me", requestOptions);
-
-            if (!userResponse.ok && !adminResponse.ok){
+            if (!userResponse.ok){
                 setToken(null);
             }
 
             localStorage.setItem("awesomeLeadsToken", token);
         };
+
+        
         fetchUser();
     }, [token]);
 

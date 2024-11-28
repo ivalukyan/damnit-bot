@@ -8,7 +8,7 @@ import AdminHeader from "./Admin/AdminHeader";
 
 const Admin = () => {
     const [message, setMessage] = useState("")
-    const [token] = useContext(UserConetext);
+    const [adminToken] = useContext(UserConetext);
 
     const getWelcomeMessage = async () => {
         const requestOptions = {
@@ -34,12 +34,12 @@ const Admin = () => {
     return (
         <>
         {
-            token && (<AdminHeader />)
+            adminToken && (<AdminHeader />)
         }
         <div className="columns">
             <div className="column m-5 is-two-thirds">
                 {
-                    !token ? (
+                    !adminToken ? (
                         <div className="columns">
                             <AdminLogin />
                         </div>
