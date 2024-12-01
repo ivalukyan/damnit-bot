@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 
 
 const Company = () => {
@@ -11,7 +11,7 @@ const Company = () => {
             fullname: fullname,
             email: email
         }
-        
+
         const requestOptions = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -38,25 +38,25 @@ const Company = () => {
                 <div className="field">
                     <label className="label">ФИО</label>
                     <input
-                    type="text"
-                    className="input"
-                    placeholder="Как вас зовут?"
-                    value={fullname}
-                    onChange={(e) => {setFullname(e.target.value)}}
-                    autoComplete="off"
-                    required
+                        type="text"
+                        className="input"
+                        placeholder="Как вас зовут?"
+                        value={fullname}
+                        onChange={(e) => {setFullname(e.target.value)}}
+                        autoComplete="off"
+                        required
                     />
                 </div>
                 <div className="field">
                     <label className="label">Электронная почта</label>
                     <input
-                    type="email"
-                    className="input"
-                    placeholder="E-mail"
-                    value={email}
-                    onChange={(e) => {setEmail(e.target.value)}}
-                    autoComplete="off"
-                    required
+                        type="email"
+                        className="input"
+                        placeholder="E-mail"
+                        value={email}
+                        onChange={(e) => {setEmail(e.target.value)}}
+                        autoComplete="off"
+                        required
                     />
                 </div>
                 <button className="button is-primary" type="sumbit">Отправить</button>
@@ -65,4 +65,4 @@ const Company = () => {
     );
 }
 
-export default Company
+export default Company;

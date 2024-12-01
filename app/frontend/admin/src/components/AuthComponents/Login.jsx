@@ -1,14 +1,11 @@
-
-import React, {useContext, useState} from  "react";
-
-import ErrorMessage from "../ErrorMessage";
-import { UserConetext } from "../../context/UserContext";
+import React, {useState} from  "react";
+import {useNavigate} from "react-router-dom";
 
 
 const Login = () =>{
     const [phone, setPhone] = useState("");
-    const [, setToken] = useContext(UserConetext);
-    const [errorMessage, setErrorMessage] = useState("");
+    const [, setToken] = useState(localStorage.getItem("token"));
+    const navigate = useNavigate();
 
     const submitLogin = async () => {
 
@@ -27,15 +24,17 @@ const Login = () =>{
         const data = await response.json();
 
         if (!response.ok){
-            setErrorMessage("Неправильный номер при вводе");
+            setToken(null);
+            throw new Error("Failed to Login")
         } else {
-            setToken(data.access_token);
+            localStorage.setItem("token", data.access_token);
         }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         submitLogin();
+        navigate("/user/me");
     }
 
     return (
@@ -56,7 +55,6 @@ const Login = () =>{
                         />
                     </div>
                 </div>
-                <ErrorMessage message={errorMessage}/>
                 <button className="button-submit" type="submit">
                     Войти
                 </button>

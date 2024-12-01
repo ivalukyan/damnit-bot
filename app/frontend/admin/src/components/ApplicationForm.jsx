@@ -1,8 +1,10 @@
-import Login from "./AuthComponents/Login";
-import Registration from "./AuthComponents/Registration";
-import {useState} from "react";
+import { useState } from "react";
+import Person from "./ApplicationFormComponents/Person";
+import Company from "./ApplicationFormComponents/Company";
 
-const Auth = () => {
+
+
+const ApplicationForm = () => {
     const [showForm, setShowForm] = useState(true);
 
     const handleRegister = (e) => {
@@ -22,23 +24,24 @@ const Auth = () => {
     return (
         <>
             <div className="column"></div>
+            <h1 className="title has-text-centered">Оформление заявки</h1>
             <div className="buttons-move">
                 <button type="button" className="button-move" onClick={handleLogin} id="LoginBut">
-                    Войти
+                    Частное лицо
                 </button>
                 <button type="button" className="button-move" onClick={handleRegister} id="RegisterBut">
-                    Зарегестрироваться
+                    Компания
                 </button>
             </div>
             {
                 showForm ? (
-                    <Login />
+                    <Person />
                 ) : (
-                    <Registration />
+                    <Company />
                 )
             }
         </>
     );
 }
 
-export default Auth;
+export default ApplicationForm;

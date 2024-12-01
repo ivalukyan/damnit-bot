@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import {useState} from "react";
 
 
-const PrivatePerson = () => {
+const Person = () => {
     const [fullname, setFullname] = useState("");
     const [phone, setPhone] = useState("");
     const [contact, setContact] = useState("");
@@ -112,4 +112,4 @@ const PrivatePerson = () => {
     );
 }
 
-export default PrivatePerson
+export default Person
