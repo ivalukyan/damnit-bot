@@ -34,7 +34,7 @@ const UsersTape = () => {
                 token && (
                     <>
                         <nav className="navbar">
-                            <a className="navbar-brand" href="/admin">
+                            <a className="navbar-brand" href="/admin/me">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
                                      className="bi bi-caret-left-fill" viewBox="0 0 16 16">
                                     <path

@@ -7,6 +7,8 @@ import NewsTape from "./components/AdminComponents/NewsTape";
 import ApplicationForm from "./components/ApplicationForm";
 import Auth from "./components/Auth";
 import UserPanel from "./components/UserPanel";
+import StoreTape from './components/AdminComponents/StoreTape';
+import ChatsTape from './components/AdminComponents/ChatsTape';
 
 const App = () => {
     return (
@@ -16,8 +18,10 @@ const App = () => {
                 <Route path="/user/me" element={<UserPanel />} />
                 <Route path="/admin/login" element={<AuthAdmin/>}/>
                 <Route path="/admin/me" element={<AdminPanel />} />
+                <Route path="/admin/store" element={<StoreTape />} />
                 <Route path="/admin/list_users" element={<UsersTape />} />
                 <Route path="/admin/news" element={<NewsTape />} />
+                <Route path="/admin/chats" element={<ChatsTape />} />
                 <Route path="/application_form" element={<ApplicationForm />} />
             </Routes>
         </BrowserRouter>

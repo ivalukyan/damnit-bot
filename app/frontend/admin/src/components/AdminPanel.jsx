@@ -25,14 +25,14 @@ const AdminPanel = () => {
                     </nav>
                     <div className="column">
                         <div className="admin-tape">
-                            <a className="mini-card" href="/admin_chats">
+                            <a className="mini-card" href="/admin/chats">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
                                      className="bi bi-person-fill" viewBox="0 0 16 16">
                                     <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                                 </svg>
                                 <p className="mini-card-text">Чаты</p>
                             </a>
-                            <a className="mini-card" href="/admin_store">
+                            <a className="mini-card" href="/admin/store">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
                                      className="bi bi-shop-window" viewBox="0 0 16 16">
                                     <path
