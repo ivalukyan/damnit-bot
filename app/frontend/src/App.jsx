@@ -9,6 +9,8 @@ import Auth from "./components/Auth";
 import UserPanel from "./components/UserPanel";
 import StoreTape from './components/AdminComponents/StoreTape';
 import ChatsTape from './components/AdminComponents/ChatsTape';
+import Profile from './components/UserComponents/Profile';
+import Chat from "./components/UserComponents/Chat";
 
 const App = () => {
     return (
@@ -16,6 +18,8 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Auth />} />
                 <Route path="/user/me" element={<UserPanel />} />
+                <Route path="/user/profile" element={<Profile />} />
+                <Route path="/user/chat" element={<Chat />} />
                 <Route path="/admin/login" element={<AuthAdmin/>}/>
                 <Route path="/admin/me" element={<AdminPanel />} />
                 <Route path="/admin/store" element={<StoreTape />} />

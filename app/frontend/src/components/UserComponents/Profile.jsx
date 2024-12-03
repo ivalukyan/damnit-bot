@@ -1,7 +1,9 @@
 import {useState} from "react";
+import { useNavigate } from "react-router-dom";
+import UserNews from "./News";
 
 
-const UserPanel = () => {
+const Profile = () => {
     // State declarations
     const [fullname, setFullname] = useState("");
     const [email, setEmail] = useState("");
@@ -87,7 +89,7 @@ const UserPanel = () => {
                 token && (
                     <>
                         <nav className="navbar" id="HeaderId">
-                            <a className="user-icon" href="/">
+                            <a className="user-icon" href="/user/me">
                                 <svg xmlns="http://www.w3.org/2000/svg" id="BackSvg" width="32" height="32"
                                      fill="currentColor" className="bi bi-arrow-left" viewBox="0 0 16 16">
                                     <path fillRule="evenodd"
@@ -95,7 +97,7 @@ const UserPanel = () => {
                                 </svg>
                             </a>
                             <h4 className="title-header" id="TitleHeader">DamnIT</h4>
-                            <button className="button is-danger" id="LogoutBut" onClick={handleLogout}>Выйти</button>)
+                            <button className="button is-danger" id="LogoutBut" onClick={handleLogout}>Выйти</button>
                         </nav>
                         <div className="column"></div>
                         {isActiveNotification && (
@@ -148,7 +150,7 @@ const UserPanel = () => {
                             </div>
                         </div>
                         <div className="column">
-                            <p>Новости</p>
+                            <UserNews />
                         </div>
                     </>
                 )
@@ -157,4 +159,4 @@ const UserPanel = () => {
     );
 };
 
-export default UserPanel;
+export default Profile;

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import {useState} from "react";
+import {useEffect} from "react";
 
 const UserNews = () => {
     const [news, setNews] = useState([]);
@@ -117,10 +118,10 @@ const UserNews = () => {
                                 {selectedNews.info}
                             </div>
                             <div className="modal-footer">
-                                <button 
-                                    type="button" 
+                                <button
+                                    type="button"
                                     onClick={() => handleDelNews(selectedNews.id)}
-                                    className="button is-danger" 
+                                    className="button is-danger"
                                     id="SaveNewsBtn"
                                 >
                                     Удалить
