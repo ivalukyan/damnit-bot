@@ -1,28 +1,34 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Auth from "./components/Auth"
+import './App.css';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import AuthAdmin from "./components/AuthAdmin";
+import AdminPanel from "./components/AdminPanel";
+import UsersTape from "./components/AdminComponents/UsersTape";
+import NewsTape from "./components/AdminComponents/NewsTape";
 import ApplicationForm from "./components/ApplicationForm";
-import "./App.css"
-import Profile from "./components/Profile";
-import Store from "./components/Store";
-import Chat from "./components/Chat";
-
-
+import Auth from "./components/Auth";
+import UserPanel from "./components/UserPanel";
+import StoreTape from './components/AdminComponents/StoreTape';
+import ChatsTape from './components/AdminComponents/ChatsTape';
+import Profile from './components/UserComponents/Profile';
+import Chat from "./components/UserComponents/Chat";
 
 const App = () => {
-
     return (
-        <>
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Auth />} />
+                <Route path="/user/me" element={<UserPanel />} />
+                <Route path="/user/profile" element={<Profile />} />
+                <Route path="/user/chat" element={<Chat />} />
+                <Route path="/admin/login" element={<AuthAdmin/>}/>
+                <Route path="/admin/me" element={<AdminPanel />} />
+                <Route path="/admin/store" element={<StoreTape />} />
+                <Route path="/admin/list_users" element={<UsersTape />} />
+                <Route path="/admin/news" element={<NewsTape />} />
+                <Route path="/admin/chats" element={<ChatsTape />} />
                 <Route path="/application_form" element={<ApplicationForm />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/store" element={<Store />} />
-                <Route path="/chat" element={<Chat />} />
             </Routes>
         </BrowserRouter>
-        </>
     );
 }
 

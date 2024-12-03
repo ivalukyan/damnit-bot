@@ -1,76 +1,115 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 
 .buttons-move {
-    display: flex;
-    gap: 5px;
-    border: 2px solid #303131;
-    border-radius: 14px;
-    padding: 3px;
-    margin: 0 35px 0 35px;
+  display: flex;
+  gap: 5px;
+  border: 2px solid #303131;
+  border-radius: 14px;
+  padding: 3px;
+  margin: 0 35px 0 35px;
 }
 
 @keyframes fadeUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .button-move {
-    width: 100%;
-    color: #fff;
-    background: #303131;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 3px;
-    border: none;
-    outline: none;
-    border-radius: 11px;
-    transition: background 0.8s ease-in-out;
+  width: 100%;
+  color: #fff;
+  background: #303131;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 3px;
+  border: none;
+  outline: none;
+  border-radius: 11px;
+  transition: background 0.8s ease-in-out;
 }
 
 
 #RegisterBut {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .box {
-    box-shadow: none;
-    opacity: 0;
-    animation: fadeUp 0.8s ease-in-out;
-    animation-fill-mode: forwards;
+  box-shadow: none;
+  opacity: 0;
+  animation: fadeUp 0.8s ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 .input {
-    border: none;
-    background: #303131;
-    font-size: 16px;
-    font-weight: 500;
+  border: none;
+  background: #303131;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .button-submit {
-    background-color: #484949;
-    color: #000;
-    padding: 7px;
-    border: none;
-    outline: none;
-    width: 100%;
-    font-size: 18px;
-    font-weight: 500;
-    border-radius: 10px;
+  background-color: #484949;
+  color: #000;
+  padding: 7px;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 10px;
 }
 
 .label {
-    font-size: 18px;
-    font-weight: 600;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .control {
-    width: 100%;
-    padding: 3px;
+  width: 100%;
+  padding: 3px;
 }
 
 /*.radio {*/
@@ -82,289 +121,289 @@
 /*}*/
 
 .input-radio {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .card {
-    padding: 15px;
-    background: #1a1b1b;
-    box-shadow: rgba(0, 0, 0, 0.65) 0 5px 15px 0;
-    font-weight: 500;
-    border: none;
-    animation-fill-mode: forwards;
-    animation: fadeUp 0.8s ease-in-out;
+  padding: 15px;
+  background: #1a1b1b;
+  box-shadow: rgba(0, 0, 0, 0.65) 0 5px 15px 0;
+  font-weight: 500;
+  border: none;
+  animation-fill-mode: forwards;
+  animation: fadeUp 0.8s ease-in-out;
 }
 
 .news-buttons {
-    display: flex;
-    gap: 15px;
-    width: 100%;
-    background-color: #14a1a1;
-    border: none;
-    border-radius: 8px;
-    padding: 3px;
-    justify-content: center;
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  background-color: #14a1a1;
+  border: none;
+  border-radius: 8px;
+  padding: 3px;
+  justify-content: center;
 }
 
 #SaveNewsBtn {
-    padding: 7px;
+  padding: 7px;
 }
 
 
 .navbar {
-    display: flex;
-    width: 100%;
-    padding: 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
+  display: flex;
+  width: 100%;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
 }
 
 .title-header {
-    font-size: 25px;
-    font-weight: 800;
+  font-size: 25px;
+  font-weight: 800;
 }
 
 #LogoutBut {
-    padding: 6px;
-    position: absolute;
-    right: 0;
-    margin-right: 15px;
+  padding: 6px;
+  position: absolute;
+  right: 0;
+  margin-right: 15px;
 }
 
 .user-icon {
-    position: absolute;
-    left: 0;
-    margin-top: 5px;
-    margin-left: 15px;
-    color: #13c5c5;
+  position: absolute;
+  left: 0;
+  margin-top: 5px;
+  margin-left: 15px;
+  color: #13c5c5;
 }
 
 #BackSvg {
-    background-color: #2a2b2c;
-    border-radius: 5px;
-    padding: 2px;
+  background-color: #2a2b2c;
+  border-radius: 5px;
+  padding: 2px;
 }
 
 .subscription {
-    display: flex;
-    font-size: 18px;
-    gap: 35px;
-    align-items: center;
+  display: flex;
+  font-size: 18px;
+  gap: 35px;
+  align-items: center;
 }
 
 #sub-status {
-    color: #000;
-    background-color: #13c5c5;
-    border-radius: 5px;
-    padding: 2px;
+  color: #000;
+  background-color: #13c5c5;
+  border-radius: 5px;
+  padding: 2px;
 }
 
 #sub-disable {
-    position: absolute;
-    right: 20px;
-    padding: 2px;
-    font-size: 18px;
+  position: absolute;
+  right: 20px;
+  padding: 2px;
+  font-size: 18px;
 }
 
 #UpdateButProfile {
-    margin-top: 25px;
-    width: 100%;
+  margin-top: 25px;
+  width: 100%;
 }
 
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1050;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
 }
 
 
 .modal-content {
-    background: #1a1b1b;
-    border-radius: 8px;
-    max-width: 500px;
-    width: 100%;
-    padding: 20px;
-    margin: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(0.8);
-    opacity: 0;
-    animation: fadeUp 0.8s ease-in-out forwards;
+  background: #1a1b1b;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(0.8);
+  opacity: 0;
+  animation: fadeUp 0.8s ease-in-out forwards;
 }
 
 .btn-close {
-    position: absolute;
-    right: 30px;
+  position: absolute;
+  right: 30px;
 }
 
 .modal-body {
-    margin: 15px 0 15px 0;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.6);
+  margin: 15px 0 15px 0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.6);
 }
 
 .btn-info {
-    font-size: 16px;
-    font-weight: 500;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .card .h4 {
-    color: #fff;
+  color: #fff;
 }
 
 .column {
-    margin-top: 35px
+  margin-top: 35px
 }
 
 .modal-card-title {
-    font-size: 20px;
-    font-weight: 500;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .is-primary {
-    padding: 7px;
-    width: 100%;
+  padding: 7px;
+  width: 100%;
 }
 
 .notification {
-    margin: 0 20px 0 20px;
+  margin: 0 20px 0 20px;
 }
 
 .notification {
-    animation: fadeUp 0.8s ease-in-out;
-    animation-fill-mode: forwards;
+  animation: fadeUp 0.8s ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 .control-search {
-    margin: 0 15px 0 15px;
-    animation: fadeUp 0.6s ease-in;
+  margin: 0 15px 0 15px;
+  animation: fadeUp 0.6s ease-in;
 }
 
 .label-radio {
+  display: flex;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
+
+  /*&:focus-within {*/
+  /*    outline: .125em solid #00d1b2;*/
+  /*}*/
+
+
+  .radio-input {
+    position: absolute;
+    left: -9999px;
+
+    &:checked + span {
+      background-color: mix(#1a1b1b, #00d1b2, 84%);
+
+      &:before {
+        box-shadow: inset 0 0 0 0.4375em #00d1b2;
+      }
+    }
+  }
+
+  .text-radio {
     display: flex;
-    cursor: pointer;
-    font-weight: 500;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 0.375em;
+    align-items: center;
+    padding: 0.375em 0.75em 0.375em 0.375em;
+    border-radius: 99em;
+    transition: 0.25s ease;
 
-    /*&:focus-within {*/
-    /*    outline: .125em solid #00d1b2;*/
-    /*}*/
-
-
-    .radio-input {
-        position: absolute;
-        left: -9999px;
-
-        &:checked + span {
-            background-color: mix(#1a1b1b, #00d1b2, 84%);
-
-            &:before {
-                box-shadow: inset 0 0 0 0.4375em #00d1b2;
-            }
-        }
+    &:hover {
+      background-color: mix(#1a1b1b, #00d1b2, 84%);
     }
 
-    .text-radio {
-        display: flex;
-        align-items: center;
-        padding: 0.375em 0.75em 0.375em 0.375em;
-        border-radius: 99em;
-        transition: 0.25s ease;
-
-        &:hover {
-            background-color: mix(#1a1b1b, #00d1b2, 84%);
-        }
-
-        &:before {
-            display: flex;
-            flex-shrink: 0;
-            content: "";
-            background-color: #1a1b1b;
-            width: 1.5em;
-            height: 1.5em;
-            border-radius: 50%;
-            margin-right: 0.375em;
-            transition: 0.25s ease;
-            box-shadow: inset 0 0 0 0.125em #00d1b2;
-        }
+    &:before {
+      display: flex;
+      flex-shrink: 0;
+      content: "";
+      background-color: #1a1b1b;
+      width: 1.5em;
+      height: 1.5em;
+      border-radius: 50%;
+      margin-right: 0.375em;
+      transition: 0.25s ease;
+      box-shadow: inset 0 0 0 0.125em #00d1b2;
     }
+  }
 }
 
 .card-header{
-    display: flex;
-    align-items: center;
-    gap: 25px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
 }
 
 .card-body{
-    font-size: 20px;
-    padding: 15px 0 ;
+  font-size: 20px;
+  padding: 15px 0 ;
 }
 
 .card-body p{
-    background-color: #2a2b2c;
-    border-radius: 8px;
-    padding: 5px;
-    text-align: center;
-    width: 8rem;
+  background-color: #2a2b2c;
+  border-radius: 8px;
+  padding: 5px;
+  text-align: center;
+  width: 8rem;
 }
 
 .card-buttons{
-    display: flex;
-    align-items: center;
-    gap: 25px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
 }
 
 .chat-line{
-    display: flex;
-    width: 100%;
-    position: absolute;
-    padding: 10px;
-    bottom: 65px;
+  display: flex;
+  width: 100%;
+  position: absolute;
+  padding: 10px;
+  bottom: 65px;
 }
 
 .line{
-    display: flex;
-    width: 100%;
-    padding: 1px;
-    background-color: #303131;
+  display: flex;
+  width: 100%;
+  padding: 1px;
+  background-color: #303131;
 }
 
 .chat-input{
-    position: absolute;
-    bottom: 10px;
-    display: flex;
-    width: 100%;
-    padding: 10px;
-    gap: 10px;
-    align-items: center;
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  gap: 10px;
+  align-items: center;
 }
 
 .button-chat svg{
-    color: #303131;
+  color: #303131;
 }
 
 .chat-body{
-    margin: 10px 0 0 4px;
-    max-width: 70%;
-    word-wrap: break-word;
-    font-size: 18px;
-    font-weight: 500;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow-y: auto;
-    max-height: calc(100vh - 145px);
+  margin: 10px 0 0 4px;
+  max-width: 70%;
+  word-wrap: break-word;
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: auto;
+  max-height: calc(100vh - 145px);
 }
 
 /* хром, сафари */
@@ -375,15 +414,111 @@
 
 
 .chat-message{
-    display: flex;
-    padding: 3px;
-    margin-top: 10px;
-    margin-left: auto;
-    width: 100%;
+  display: flex;
+  padding: 3px;
+  margin-top: 10px;
+  margin-left: auto;
+  width: 100%;
 }
 
 .chat-message p{
-    background-color: #303131;
-    padding: 5px;
-    border-radius: 10px 10px 10px 0;
+  background-color: #303131;
+  padding: 5px;
+  border-radius: 10px 10px 10px 0;
+}
+
+.admin-header{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 10px;
+  justify-content: space-between;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px 0;
+}
+
+.mini-card{
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  gap: 10px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 5px 15px 0;
+  border-radius: 10px;
+  color: #abb1bf;
+}
+
+.mini-card-text{
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  width: calc(100% - 70px);
+}
+
+.admin-tape{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  justify-content: center;
+}
+
+.mini-graf{
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 5px 15px 0;
+  border-radius: 10px;
+  color: #ffffff;
+  justify-content: center;
+}
+
+.mini-news-card{
+  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 5px 15px 0;
+  border-radius: 10px;
+  color: #abb1bf;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-news-card svg{
+  width: 28px;
+  height: 28px;
+}
+
+.mini-news-card img{
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.mini-news-text{
+  width: 100%;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+#UserUpdateButton{
+  margin-top: 10px;
+}
+
+#UserDeleteButton{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.navbar{
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
+}
+
+.navbar-brand{
+  position: absolute;
+  left: 10px;
+  color: #ffffff;
+  padding: 8px 0;
+}
+
+.navbar-brand svg{
+  padding: 6px;
+  background-color: #2a2b2c;
+  border-radius: 10px;
 }

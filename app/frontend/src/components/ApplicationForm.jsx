@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import PrivatePerson from "./ApplicationForm/PrivatePerson";
-import Company from "./ApplicationForm/Company";
+import { useState } from "react";
+import Person from "./ApplicationFormComponents/Person";
+import Company from "./ApplicationFormComponents/Company";
+
 
 
 const ApplicationForm = () => {
@@ -22,25 +23,25 @@ const ApplicationForm = () => {
 
     return (
         <>
-        <div className="column"></div>
-        <h1 className="title has-text-centered">Оформление заявки</h1>
-        <div className="buttons-move">
-            <button type="button" className="button-move" onClick={handleLogin} id="LoginBut">
+            <div className="column"></div>
+            <h1 className="title has-text-centered">Оформление заявки</h1>
+            <div className="buttons-move">
+                <button type="button" className="button-move" onClick={handleLogin} id="LoginBut">
                     Частное лицо
-            </button>
-            <button type="button" className="button-move" onClick={handleRegister} id="RegisterBut">
+                </button>
+                <button type="button" className="button-move" onClick={handleRegister} id="RegisterBut">
                     Компания
-            </button>
-        </div>
-        {
-            showForm ? (
-                <PrivatePerson />
-            ) : (
-                <Company />
-            )
-        }
+                </button>
+            </div>
+            {
+                showForm ? (
+                    <Person />
+                ) : (
+                    <Company />
+                )
+            }
         </>
     );
 }
 
-export default ApplicationForm
+export default ApplicationForm;

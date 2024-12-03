@@ -1,54 +1,42 @@
-import React, {useContext, useEffect, useState} from "react";
-import Header from "../components/Auth/Header";
-import { UserConetext } from "../context/UserContext";
-import MoveButtons from "../components/Auth/MoveButtons";
-import "../App.css"
-import News from "./News";
-
+import Login from "./AuthComponents/Login";
+import Registration from "./AuthComponents/Registration";
+import {useState} from "react";
 
 const Auth = () => {
-    const [message, setMessage] = useState("")
-    const [token] = useContext(UserConetext);
+    const [showForm, setShowForm] = useState(true);
 
-    const getWelcomeMessage = async () => {
-        const requestOptions = {
-            method: "GET",
-            headers: {
-            "Content-Type": "application/json",
-            },
-        };
-        const response = await fetch("/api", requestOptions);
-        const data = await response.json();
-
-        if (!response.ok){
-            console.log("something messed up");
-        }else{
-            setMessage(data.message);
-        }
+    const handleRegister = (e) => {
+        e.preventDefault();
+        document.getElementById("RegisterBut").style.backgroundColor = "#303131";
+        document.getElementById("LoginBut").style.backgroundColor = "transparent";
+        setShowForm(false);
     };
 
-    useEffect(() => {
-        getWelcomeMessage();
-    }, []);
+    const handleLogin = (e) => {
+        e.preventDefault();
+        document.getElementById("LoginBut").style.backgroundColor = "#303131";
+        document.getElementById("RegisterBut").style.backgroundColor = "transparent";
+        setShowForm(true);
+    }
 
     return (
         <>
-        <Header title={message}/>
-        <div className="columns">
             <div className="column"></div>
-            <div className="column m-5 is-two-thirds">
-                {
-                    !token ? (
-                        <div className="columns">
-                            <MoveButtons />
-                        </div>
-                    ) : (
-                        <News />
-                    )
-                }
+            <div className="buttons-move">
+                <button type="button" className="button-move" onClick={handleLogin} id="LoginBut">
+                    Войти
+                </button>
+                <button type="button" className="button-move" onClick={handleRegister} id="RegisterBut">
+                    Зарегестрироваться
+                </button>
             </div>
-            <div className="column"></div>
-        </div>
+            {
+                showForm ? (
+                    <Login />
+                ) : (
+                    <Registration />
+                )
+            }
         </>
     );
 }
