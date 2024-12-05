@@ -1,9 +1,11 @@
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const NewsTape = () => {
     const [token] = useState(localStorage.getItem("token"));
     const [search, setSearch] = useState("");
     const [news, setNews] = useState([]);
+    const navigate = useNavigate();
 
     const NewsList = async () => {
         const requestOptions = {
@@ -17,6 +19,29 @@ const NewsTape = () => {
         } else {
             const data = await response.json();
             setNews(data);
+        }
+    }
+
+    const UpdateNews = async (newsId) => {
+        navigate(`/admin/news/update/${newsId}`)
+    }
+
+    const DeleteNews = async (newsId) => {
+        if (!window.confirm("Вы действительно хотите удалить данную новость?")) return;
+
+        const requestOptions = {
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                user_id: newsId
+            })
+        }
+
+        const response = await fetch("/admin/news/delete", requestOptions);
+        if (!response.ok){
+            throw new Error("Failed delete news");
+        } else {
+            alert("Новость удалена");
         }
     }
 
@@ -59,8 +84,16 @@ const NewsTape = () => {
                                         <h4 className="title is-4">{el.title}</h4>
                                         <p>Краткая информация: {el.short_info}</p>
                                         <p>Инфо: {el.info}</p>
-                                        <button className="button is-primary" id="UserUpdateButton">Изменить</button>
-                                        <button className="button is-danger" id="UserDeleteButton">Удалить</button>
+                                        <button
+                                            className="button is-primary"
+                                            id="UserUpdateButton"
+                                            onClick={() => UpdateNews(el.id)}
+                                        >Изменить</button>
+                                        <button
+                                            className="button is-danger"
+                                            id="UserDeleteButton"
+                                            onClick={() => DeleteNews(el.id)}
+                                        >Удалить</button>
                                     </div>
                                 ))}
                         </div>

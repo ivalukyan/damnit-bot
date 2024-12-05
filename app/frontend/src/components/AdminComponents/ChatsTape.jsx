@@ -4,9 +4,17 @@ const ChatsTape = () => {
     const [chats, setChats] = useState([]);
 
     const getChats = async () => {
-        const requestoptions = {
+        const requestOptions = {
             method: "GET",
             headers: {"Content-Type": "application/json"}
+        }
+
+        const response = await fetch("/admin/chats", requestOptions);
+        if (!response.ok){
+            throw new Error("Failed loading chats");
+        } else {
+            const data = await response.json();
+            console.log(data);
         }
     }
 
