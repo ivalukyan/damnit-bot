@@ -7,3 +7,8 @@ class AdminSchemas(BaseModel):
     fullname: str
     phone: str
     email: str
+
+
+class AdminDeleteUser(BaseModel):
+    user_id: UUID
+    msg: str | None = None
