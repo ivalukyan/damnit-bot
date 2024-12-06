@@ -42,7 +42,8 @@ const UsersTape = () => {
     }
 
     const UpdateUser = (userId) => {
-        navigate(`/admin/user/update/${userId}`);
+        localStorage.setItem(userId, "user_id_update")
+        navigate(`/admin/user/update`);
     }
 
     const handleSearch = (e) => {

@@ -23,7 +23,8 @@ const NewsTape = () => {
     }
 
     const UpdateNews = async (newsId) => {
-        navigate(`/admin/news/update/${newsId}`)
+        localStorage.setItem(newsId, "news_id_update");
+        navigate(`/admin/news/update`);
     }
 
     const DeleteNews = async (newsId) => {

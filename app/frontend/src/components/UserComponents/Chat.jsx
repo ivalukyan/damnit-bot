@@ -1,9 +1,54 @@
 import {useRef, useState} from "react";
 
 const UserChat = () => {
+
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const chatMainRef = useRef(null);
+    const [userId, setUserId] = useState(localStorage.getItem("awesomeUserId"));
+    const socket = new WebSocket(`ws://localhost:3000/chat/${userId}`);
+
+    socket.onopen = () => {console.log("Соединение установлено")}
+
+    socket.onmessage = (message) => {
+        const incomingMessage = JSON.parse(message.data);
+        addMessage(incomingMessage.content, incomingMessage.role);
+    }
+
+    socket.onclose = () => {console.log("Соеднение закрыто")}
+
+    const addMessage = (text, role_id) => {
+        let messages = document.getElementById('messages').querySelector('ul');
+        let mes = document.createElement('li');
+
+        mes.className = role_id === userId ? 'sent': 'receive';
+
+        let contentSpan = document.createElement('span');
+        contentSpan.textContent = text;
+
+        let date = new Date();
+        let h = date.getHours();
+        let m = date.getMinutes();
+
+        h = h < 10 ? '0' + h : h;
+        m = m < 10 ? '0' + m : m;
+
+        // Создание блока сообщений
+
+        let timeSpan = document.createElement('span');
+        timeSpan.className = 'time';
+        timeSpan.textContent = `${h}:${m}`;
+
+        let contentDiv = document.createElement('div');
+        contentDiv.className = 'message-content';
+        contentDiv.appendChild(contentSpan);
+        contentDiv.appendChild(timeSpan);
+
+        mes.appendChild(contentDiv);
+        messages.appendChild(mes);
+
+        messages.scrollTop = messages.scrollHeight;
+    }
 
     const handleKeyPress = (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
