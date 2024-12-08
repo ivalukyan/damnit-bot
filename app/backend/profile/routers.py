@@ -1,16 +1,41 @@
-from fastapi import APIRouter, Depends
+import json
+
+from fastapi import APIRouter, Depends, WebSocket, WebSocketDisconnect
 from sqlalchemy.orm import Session
+from uuid import UUID
 
 from auth.dependencies import get_current_user, get_db_session
 from auth.dependencies import get_user
 from auth.model import Profile
-from db.database import Users, News, Users_News
-from profile.schemas import UpdateProfileSchema, UserNewsSchemas, NewsSchemas
+from db.database import Users, News, Users_News, Messages
+from profile.schemas import UpdateProfileSchema, UserNewsSchemas, NewsSchemas, UserMessagesSchemas
 
 router = APIRouter(
     tags=["Профиль"],
     prefix="/user"
 )
+
+
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: list[WebSocket] = []
+
+    async def connect(self, websocket: WebSocket):
+        await websocket.accept()
+        self.active_connections.append(websocket)
+
+    async def disconnect(self, websocket: WebSocket):
+        self.active_connections.remove(websocket)
+
+    async def send_personal_message(self, message: str, websocket: WebSocket):
+        await websocket.send_text(message)
+
+    async def broadcast(self, message: str):
+        for connection in self.active_connections:
+            await connection.send_text(message)
+
+
+manager = ConnectionManager()
 
 
 @router.get('/me', response_model=Profile)
@@ -60,3 +85,31 @@ async def delete_user_news(user_news: UserNewsSchemas, db: Session = Depends(get
     db.commit()
 
     return UserNewsSchemas(user_id=user_news.user_id, msg="Статья удалена из избранных.")
+
+
+@router.get("/messages/{chat_id}")
+async def get_messages(chat_id: str, db: Session = Depends(get_db_session)):
+    story = db.query(Messages).filter(Messages.chat_id == chat_id).all()
+    return story
+
+
+@router.post("/messages", response_model=UserMessagesSchemas)
+async def save_users_message(message:UserMessagesSchemas, db: Session = Depends(get_db_session)):
+    message = Messages(chat_id=message.chat.id, content=message.content, role=message.role)
+    db.add(message)
+    db.commit()
+
+
+@router.websocket("/chat/{user_id}")
+async def websocket_endpoint(websocket: WebSocket, user_id: str):
+    await manager.connect(websocket)
+    try:
+        while True:
+            data = await websocket.receive_text()
+            await manager.broadcast(f"{data}")
+            data_ = json.loads(data)
+            print(data_)
+
+    except Exception as e:
+        print(e)
+        await manager.disconnect(websocket)

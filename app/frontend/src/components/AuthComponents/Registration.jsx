@@ -16,7 +16,7 @@ const Registration = () => {
             body: JSON.stringify({"fullname": fullname, "phone": phone, "email": email})
         };
 
-        const response = await fetch("/auth/sign_up", requestOptions);
+        const response = await fetch("/api/auth/sign_up", requestOptions);
         const data = await response.json();
 
         if (!response.ok){

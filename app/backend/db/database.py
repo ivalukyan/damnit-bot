@@ -64,6 +64,14 @@ class Admin(Base):
     email = Column(String, nullable=True)
 
 
+class Messages(Base):
+    __tablename__ = 'messages'
+    id = Column(UUID, primary_key=True, default=uuid4)
+    chat_id = Column(UUID, nullable=True)
+    content = Column(String, nullable=True)
+    role = Column(String, nullable=True)
+
+
 if __name__ == '__main__':
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)

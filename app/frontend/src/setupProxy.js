@@ -16,6 +16,7 @@ module.exports = function (app) {
             target: 'ws://localhost:8000',
             ws: true,
             changeOrigin: true,
+            pathRewrite: { '^/ws': '' },
         })
     );
 };

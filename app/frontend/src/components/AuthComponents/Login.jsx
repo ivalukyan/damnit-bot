@@ -20,7 +20,7 @@ const Login = () =>{
             body: payload
         }
 
-        const response = await fetch("/auth/token", requestOptions);
+        const response = await fetch("/api/auth/token", requestOptions);
         const data = await response.json();
 
         if (!response.ok){

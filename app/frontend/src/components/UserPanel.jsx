@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {useNavigate} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const UserPanel = () => {
     const [news, setNews] = useState([]);
@@ -10,7 +10,7 @@ const UserPanel = () => {
     const [notification, setNotification] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const toggleModal = (newsItem = null) => {
         setModalActive(!isModalActive);
@@ -19,32 +19,31 @@ const UserPanel = () => {
 
     const closeModal = () => {
         setNotification(false);
-    }
+    };
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value.toLowerCase());
     };
 
     const handleSaveNews = async (news_id) => {
-
         const requestOptions = {
             method: 'POST',
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 news_id: news_id,
                 user_id: userId
             })
-        }
+        };
 
         const response = await fetch("/news/save", requestOptions);
         if (!response.ok) {
             console.error("Bad request");
         } else {
-            const data = await response.json()
+            const data = await response.json();
             console.log(data.msg);
             setNotification(true);
         }
-    }
+    };
 
     const getUser = async () => {
         const requestOptions = {
@@ -55,7 +54,7 @@ const UserPanel = () => {
             },
         };
 
-        const response = await fetch("/user/me", requestOptions);
+        const response = await fetch("/api/user/me", requestOptions);
 
         if (!response.ok) {
             setToken(null);
@@ -69,11 +68,11 @@ const UserPanel = () => {
     const getNews = async () => {
         const requestOptions = {
             method: 'GET',
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
         };
 
         try {
-            const response = await fetch("/news", requestOptions);
+            const response = await fetch("/api/news/", requestOptions);
             if (!response.ok) throw new Error("Network response was not ok");
             const data = await response.json();
             setNews(data);
@@ -84,29 +83,35 @@ const UserPanel = () => {
 
     const handleLogout = () => {
         setToken(null);
-    }
+    };
 
     useEffect(() => {
         getNews();
         getUser();
-    });
+    }, []);
+
+    useEffect(() => {
+        if (!token) {
+            navigate("/");
+        }
+    }, [token, navigate]);
 
     return (
         <>
             {token ? (
                 <>
                     <nav className="admin-header">
-                        <a href='/user/profile' style={{color: "#fff"}}>
+                        <a href='/user/profile' style={{ color: "#fff" }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                                 className="bi bi-person" viewBox="0 0 16 16">
+                                className="bi bi-person" viewBox="0 0 16 16">
                                 <path
-                                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
                             </svg>
                         </a>
                         <p className="title-header">DamnIT</p>
                         <button className="button is-danger" onClick={handleLogout}>Выйти</button>
                     </nav>
-                    <div className="control-search" style={{margin: "25px 10px"}}>
+                    <div className="control-search" style={{ margin: "25px 10px" }}>
                         <input
                             type="text"
                             id="searchFieldId"
@@ -118,11 +123,11 @@ const UserPanel = () => {
                             onChange={handleSearchChange}
                         />
                     </div>
-                    <div style={{margin: "10px 10px"}}>
+                    <div style={{ margin: "10px 10px" }}>
                         <a className="mini-card" href="/user/chat">
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
-                                 className="bi bi-person-fill" viewBox="0 0 16 16">
-                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                className="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
                             </svg>
                             <p className="mini-card-text">Чат</p>
                         </a>
@@ -177,10 +182,7 @@ const UserPanel = () => {
                         )}
                     </div>
                 </>
-            ) : (
-                navigate("/")
-            )}
-
+            ) : null}
         </>
     );
 };

@@ -24,3 +24,8 @@ class UserNewsSchemas(BaseModel):
     news: list[NewsSchemas] | None = None
     msg: str | None = None
 
+
+class UserMessagesSchemas(BaseModel):
+    chat_id: UUID | None = None
+    content: str | None = None
+    role: str | None = None
