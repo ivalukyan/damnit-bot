@@ -31,7 +31,8 @@ const StoreTape = () => {
     }
 
     const UpdateStoreCard = (cardId) => {
-        navigate(`/admin/store/update/${cardId}`);
+        localStorage.setItem(cardId, "card_id_update");
+        navigate(`/admin/store/update`);
     }
 
     const DeleteStoreCard = async (cardId) => {

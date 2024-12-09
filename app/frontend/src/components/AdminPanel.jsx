@@ -56,7 +56,7 @@ const AdminPanel = () => {
                         </div>
                     </div>
                 </>
-            ) : (navigate("/"))}
+            ) : (navigate("/admin/login"))}
         </>
     )
 };

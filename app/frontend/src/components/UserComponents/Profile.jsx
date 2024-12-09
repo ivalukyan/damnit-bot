@@ -8,11 +8,12 @@ const Profile = () => {
     const [fullname, setFullname] = useState("");
     const [email, setEmail] = useState("");
     const [token, setToken] = useState(localStorage.getItem("token"));
-    const [userName, setUserName] = useState("");
-    const [userPhone, setUserPhone] = useState("");
-    const [userEmail, setUserEmail] = useState("");
+    const [userName, setUserName] = useState(localStorage.getItem("fullname"));
+    const [userPhone, setUserPhone] = useState(localStorage.getItem("phone"));
+    const [userEmail, setUserEmail] = useState(localStorage.getItem("email"));
     const [isActive, setIsActive] = useState(true);
     const [isActiveNotification, setIsActiveNotification] = useState(false);
+    const navigate = useNavigate();
 
 
     const getUser = async () => {
@@ -25,7 +26,7 @@ const Profile = () => {
         };
 
         try {
-            const response = await fetch("/user/me", requestOptions);
+            const response = await fetch("/api/user/me", requestOptions);
             if (response.ok) {
                 const data = await response.json();
                 setUserName(data.fullname);
@@ -56,7 +57,7 @@ const Profile = () => {
         };
 
         try {
-            const response = await fetch("/user/update", requestOptions);
+            const response = await fetch("/api/user/update", requestOptions);
             if (response.ok) {
                 const data = await response.json();
                 setUserName(data.fullname);
@@ -81,6 +82,7 @@ const Profile = () => {
 
     const handleLogout = () => {
         setToken(null);
+        navigate("/")
     }
 
     return (

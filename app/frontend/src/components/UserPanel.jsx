@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {useNavigate} from "react-router-dom";
 
 const UserPanel = () => {
     const [news, setNews] = useState([]);
@@ -8,6 +9,10 @@ const UserPanel = () => {
     const [userId, setUserId] = useState(localStorage.getItem("awesomeUserId"));
     const [notification, setNotification] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
+    const [userNews, setUserNews] = useState([]);
+    const [saveMessage, setSaveMessage] = useState("")
+
+    const navigate = useNavigate();
 
     const toggleModal = (newsItem = null) => {
         setModalActive(!isModalActive);
@@ -16,32 +21,70 @@ const UserPanel = () => {
 
     const closeModal = () => {
         setNotification(false);
-    }
+    };
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value.toLowerCase());
     };
 
+    useEffect(() => {
+        const getUserNews = async () => {
+            const requestOptions = {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({user_id: userId})
+            };
+
+            const response = await fetch("/api/user/news", requestOptions);
+
+            if (!response.ok) {
+                throw new Error("Failed loading user news");
+            }
+            const data = await response.json();
+            setUserNews(data.news);
+        }
+
+        getUserNews();
+    }, []);
+
     const handleSaveNews = async (news_id) => {
 
+        if (userNews.length !== 0) {
+            const isAlreadySaved = userNews.some((el) => el.id === news_id);
+
+            if (isAlreadySaved) {
+                setSaveMessage("Новость уже сохранена!");
+                setNotification(true);
+                return;
+            }
+        }
+
+
         const requestOptions = {
-            method: 'POST',
+            method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 news_id: news_id,
-                user_id: userId
-            })
-        }
+                user_id: userId,
+            }),
+        };
 
-        const response = await fetch("/news/save", requestOptions);
-        if (!response.ok) {
-            console.error("Bad request");
-        } else {
-            const data = await response.json()
-            console.log(data.msg);
-            setNotification(true);
+        try {
+
+            const response = await fetch("/api/news/save", requestOptions);
+
+            if (!response.ok) {
+                console.error("Bad request");
+            } else {
+                const data = await response.json();
+                setSaveMessage(data.msg);
+                setNotification(true);
+            }
+        } catch (error) {
+            console.error("An error occurred:", error);
         }
-    }
+    };
+
 
     const getUser = async () => {
         const requestOptions = {
@@ -52,7 +95,7 @@ const UserPanel = () => {
             },
         };
 
-        const response = await fetch("/user/me", requestOptions);
+        const response = await fetch("/api/user/me", requestOptions);
 
         if (!response.ok) {
             setToken(null);
@@ -70,7 +113,7 @@ const UserPanel = () => {
         };
 
         try {
-            const response = await fetch("/news", requestOptions);
+            const response = await fetch("/api/news/", requestOptions);
             if (!response.ok) throw new Error("Network response was not ok");
             const data = await response.json();
             setNews(data);
@@ -81,19 +124,25 @@ const UserPanel = () => {
 
     const handleLogout = () => {
         setToken(null);
-    }
+    };
 
     useEffect(() => {
         getNews();
         getUser();
-    });
+    }, []);
+
+    useEffect(() => {
+        if (!token) {
+            navigate("/");
+        }
+    }, [token, navigate]);
 
     return (
         <>
             <nav className="admin-header">
                 <a href='/user/profile' style={{color: "#fff"}}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                            className="bi bi-person" viewBox="0 0 16 16">
+                         className="bi bi-person" viewBox="0 0 16 16">
                         <path
                             d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
                     </svg>
@@ -124,7 +173,7 @@ const UserPanel = () => {
             </div>
             {notification && (<div className="notification is-info">
                 <button className="delete" onClick={closeModal}></button>
-                Статья сохранена.
+                {saveMessage}
             </div>)}
             <div className="column" id="main">
                 {news

@@ -21,6 +21,10 @@ async def get_news(db: Session = Depends(get_db_session)):
 @router.post("/save", response_model=User_News)
 async def save_news(user_news: User_News, db: Session = Depends(get_db_session)):
 
+    if db.query(Users_News).filter(Users_News.news_id == user_news.news_id).first():
+        user_news.msg = "Статья была уже сохранена!"
+        return user_news
+
     save_data = Users_News(user_id=user_news.user_id, news_id=user_news.news_id)
     db.add(save_data)
     db.commit()

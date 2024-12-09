@@ -413,20 +413,6 @@
 .chat-body { -ms-overflow-style: none; }
 
 
-.chat-message{
-  display: flex;
-  padding: 3px;
-  margin-top: 10px;
-  margin-left: auto;
-  width: 100%;
-}
-
-.chat-message p{
-  background-color: #303131;
-  padding: 5px;
-  border-radius: 10px 10px 10px 0;
-}
-
 .admin-header{
   display: flex;
   gap: 20px;
@@ -435,6 +421,13 @@
   justify-content: space-between;
   box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px 0;
 }
+
+.admin-header svg{
+  padding: 2px;
+  border: 2px solid #00d1b2;
+  border-radius: 11px;
+}
+
 
 .mini-card{
   display: flex;
@@ -521,4 +514,40 @@
   padding: 6px;
   background-color: #2a2b2c;
   border-radius: 10px;
+}
+
+/*.chat-message{*/
+/*  display: flex;*/
+/*  padding: 3px;*/
+/*  margin-top: 10px;*/
+/*  margin-left: auto;*/
+/*  width: 100%;*/
+/*}*/
+
+.sent {
+  display: flex;
+  padding: 3px;
+  margin-top: 10px;
+  margin-left: auto;
+  width: 100%;
+}
+
+.receive {
+  display: flex;
+  padding: 3px;
+  margin-top: 10px;
+  margin-right: auto;
+  width: 100%;
+}
+
+.sent p{
+  background-color: #303131;
+  padding: 5px;
+  border-radius: 10px 10px 10px 0;
+}
+
+.receive p{
+  background-color: #303131;
+  padding: 5px;
+  border-radius: 10px 10px 10px 0;
 }
