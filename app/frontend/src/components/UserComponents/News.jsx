@@ -12,6 +12,7 @@ const UserNews = () => {
 
     const closeModal = () => {
         setNotification(false);
+        //window.location.reload();
     }
 
     const getUserNews = async () => {
@@ -21,7 +22,7 @@ const UserNews = () => {
             body: JSON.stringify({ user_id: userId })
         }
 
-        const response = await fetch("/user/news", requestOptions);
+        const response = await fetch("/api/user/news", requestOptions);
 
         if (!response.ok){
             const data = await response.json();
@@ -33,13 +34,22 @@ const UserNews = () => {
     }
 
     const handleDelNews = async (news_id) => {
+        if (!window.confirm("Вы действительно хотите удалить данную новость?")) return;
+
+
+        if (!news_id) {
+            setMessage("Статья уже удалена!");
+            setNotification(true);
+            return;
+        }
+
         const requestOptions = {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ news_id, user_id: userId })
         }
 
-        const response = await fetch("/user/news_del", requestOptions);
+        const response = await fetch("/api/user/news_del", requestOptions);
         if (!response.ok) {
             console.error("Bad request");
         } else {
@@ -78,7 +88,7 @@ const UserNews = () => {
                 />
             </div>
             {notification && (
-                <div className="notification is-info">
+                <div className="notification is-info" style={{margin: "20px 15px"}}>
                     <button className="delete" onClick={closeModal}></button>
                     {message}
                 </div>

@@ -7,7 +7,7 @@ from uuid import UUID
 from auth.dependencies import get_current_user, get_db_session
 from auth.dependencies import get_user
 from auth.model import Profile
-from db.database import Users, News, Users_News, Messages
+from db.database import Users, News, Users_News, Messages, Chats
 from profile.schemas import UpdateProfileSchema, UserNewsSchemas, NewsSchemas, UserMessagesSchemas
 
 router = APIRouter(
@@ -78,6 +78,11 @@ async def get_news_user(user_news: UserNewsSchemas, db: Session = Depends(get_db
 @router.post("/news_del", response_model=UserNewsSchemas)
 async def delete_user_news(user_news: UserNewsSchemas, db: Session = Depends(get_db_session)):
 
+    print(db.query(Users_News).filter(Users_News.news_id == user_news.news_id).count() == 0)
+
+    if db.query(Users_News).filter(Users_News.news_id == user_news.news_id).count() == 0:
+        return UserNewsSchemas(user_id=user_news.user_id, msg="Статья была удалена ранее.")
+
     news = db.query(Users_News).filter(Users_News.user_id == user_news.user_id
                                        and Users_News.news_id == user_news.news_id).first()
 
@@ -95,20 +100,29 @@ async def get_messages(chat_id: str, db: Session = Depends(get_db_session)):
 
 @router.post("/messages", response_model=UserMessagesSchemas)
 async def save_users_message(message:UserMessagesSchemas, db: Session = Depends(get_db_session)):
-    message = Messages(chat_id=message.chat.id, content=message.content, role=message.role)
+    message = Messages(chat_id=message.chat_id, content=message.content, role=message.role)
     db.add(message)
     db.commit()
+    return {'chat_id': message.chat_id, 'content': message.content, 'role': message.role}
 
 
 @router.websocket("/chat/{user_id}")
-async def websocket_endpoint(websocket: WebSocket, user_id: str):
+async def websocket_endpoint(websocket: WebSocket, user_id: str, db: Session = Depends(get_db_session)):
     await manager.connect(websocket)
     try:
         while True:
             data = await websocket.receive_text()
             await manager.broadcast(f"{data}")
-            data_ = json.loads(data)
-            print(data_)
+            mes = json.loads(data)
+
+            message = Messages(chat_id=mes['chat_id'], content=mes['content'], role=mes['role'])
+            db.add(message)
+            db.commit()
+
+            if db.query(Chats).filter(Chats.chat_id == mes['chat_id']).count() == 0:
+                chat = Chats(chat_id=mes['chat_id'], fullname=mes['username'])
+                db.add(chat)
+                db.commit()
 
     except Exception as e:
         print(e)

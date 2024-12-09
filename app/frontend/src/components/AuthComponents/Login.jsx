@@ -1,10 +1,13 @@
-import React, {useState} from  "react";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 
-const Login = () =>{
+const Login = () => {
     const [phone, setPhone] = useState("");
-    const [, setToken] = useState(localStorage.getItem("token"));
+    const [token, setToken] = useState(localStorage.getItem("token"));
+    const [, setUserName] = useState(localStorage.getItem("fullname"));
+    const [, setUserPhone] = useState(localStorage.getItem("phone"));
+    const [, setUserEmail] = useState(localStorage.getItem("email"));
     const navigate = useNavigate();
 
     const submitLogin = async () => {
@@ -23,18 +26,48 @@ const Login = () =>{
         const response = await fetch("/api/auth/token", requestOptions);
         const data = await response.json();
 
-        if (!response.ok){
+        if (!response.ok) {
             setToken(null);
             throw new Error("Failed to Login")
         } else {
             localStorage.setItem("token", data.access_token);
+        }
+
+        const request = {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
+        try {
+            const response = await fetch("/api/user/me", request);
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem("fullname", data.fullname);
+                localStorage.setItem("phone", data.phone);
+                localStorage.setItem("email", data.email);
+            } else {
+                console.error("Failed to fetch user data");
+                setUserPhone("");
+                setUserEmail("");
+                setUserName("");
+                setToken(null);
+            }
+        } catch (error) {
+            console.error("Error fetching user data", error);
         }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         submitLogin();
-        navigate("/user/me");
+        if (!token) {
+            navigate("/");
+        } else {
+            navigate("/user/me");
+        }
     }
 
     return (

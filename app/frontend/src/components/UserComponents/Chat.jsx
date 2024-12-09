@@ -6,6 +6,7 @@ const UserChat = () => {
     const [socketStatus, setSocketStatus] = useState("Connecting...");
     const [selectedChat] = useState("user");
     const [userId] = useState(() => localStorage.getItem("awesomeUserId"));
+    const [fullname] = useState(localStorage.getItem("fullname"));
     const socketRef = useRef(null);
 
     useEffect(() => {
@@ -26,8 +27,36 @@ const UserChat = () => {
         };
     }, [userId]);
 
+    useEffect(() => {
+        const storyMessages = async () => {
+            try {
+                    const requestOptions = {
+                    method: "GET",
+                    headers: {"Content-Type" : "application/json"}
+                }
+
+                const response = await fetch(`/api/user/messages/${userId}`, requestOptions);
+
+                if (!response.ok){
+                    throw new Error("Failed get user story messages");
+                }
+
+                const story = await response.json();
+                //console.log(story);
+                setMessages(story);
+            } catch (e) {
+                console.error("Error in loading story massages", e);
+            }
+
+        }
+
+        storyMessages();
+
+    }, [userId]);
+
+
     const addMessage = (text, role_id) => {
-        setMessages((prevMessages) => [...prevMessages, { text, role: role_id }]);
+        setMessages((prevMessages) => [...prevMessages, { content: text, role: role_id }]);
     };
 
     useEffect(() => {
@@ -50,25 +79,25 @@ const UserChat = () => {
         try {
             const payload = {
                 chat_id: userId,
+                username: fullname,
                 recipient_id: selectedChat,
                 content: newMessage.trim(),
                 role: "user",
             };
 
             // Send via REST API
-            await fetch("/api/user/messages", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            });
+            // await fetch("/api/user/messages", {
+            //     method: "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify(payload),
+            // });
 
             // Send via WebSocket
             socketRef.current.send(JSON.stringify(payload));
 
-            addMessage(newMessage.trim(), "user");
+            //addMessage(newMessage.trim(), "user");
         } catch (error) {
             console.error("Error sending message:", error);
-            addMessage("Failed to send message. Please try again.", "system");
         } finally {
             setMessage("");
         }
@@ -95,7 +124,7 @@ const UserChat = () => {
                 <div className="chat-body">
                     {messages.map((msg, index) => (
                         <div key={index} className={`chat-message ${msg.role === "user" ? "sent" : "receive"}`}>
-                            <p>{msg.text}</p>
+                            <p>{msg.content}</p>
                         </div>
                     ))}
                 </div>

@@ -9,6 +9,8 @@ from db.database import Users, News, Store
 
 from admin.schemas import UserSchemas, StoreSchemas, NewsSchemas
 
+from db.database import Chats
+
 router = APIRouter(
     prefix="/admin",
     tags=["Админ"]
@@ -23,6 +25,11 @@ async def get_admin(admin: AdminSchemas = Depends(get_current_admin)):
 @router.get("/list_users")
 async def get_list_users(db: Session = Depends(get_db_session)):
     return db.query(Users).all()
+
+
+@router.get("/chats")
+async def get_chats(db: Session = Depends(get_db_session)):
+    return db.query(Chats).all()
 
 
 @router.delete("/user/delete", response_model=UserSchemas)

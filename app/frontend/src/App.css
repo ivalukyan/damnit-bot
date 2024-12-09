@@ -422,6 +422,13 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px 0;
 }
 
+.admin-header svg{
+  padding: 2px;
+  border: 2px solid #00d1b2;
+  border-radius: 11px;
+}
+
+
 .mini-card{
   display: flex;
   padding: 10px;
