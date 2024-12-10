@@ -11,22 +11,28 @@ import StoreTape from './components/AdminComponents/StoreTape';
 import ChatsTape from './components/AdminComponents/ChatsTape';
 import Profile from './components/UserComponents/Profile';
 import Chat from "./components/UserComponents/Chat";
+import AddStoreForm from "./components/AdminComponents/AddStoreForm";
+import UpdateStoreForm from "./components/AdminComponents/UpdStoreForm";
+import UserStore from "./components/UserComponents/Store";
 
 const App = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Auth />} />
-                <Route path="/user/me" element={<UserPanel />} />
-                <Route path="/user/profile" element={<Profile />} />
-                <Route path="/user/chat" element={<Chat />} />
+                <Route path="/" element={<Auth/>}/>
+                <Route path="/user/me" element={<UserPanel/>}/>
+                <Route path="/user/profile" element={<Profile/>}/>
+                <Route path="/user/chat" element={<Chat/>}/>
+                <Route path="/user/store" element={<UserStore />} />
                 <Route path="/admin/login" element={<AuthAdmin/>}/>
-                <Route path="/admin/me" element={<AdminPanel />} />
-                <Route path="/admin/store" element={<StoreTape />} />
-                <Route path="/admin/list_users" element={<UsersTape />} />
-                <Route path="/admin/news" element={<NewsTape />} />
-                <Route path="/admin/chats" element={<ChatsTape />} />
-                <Route path="/application_form" element={<ApplicationForm />} />
+                <Route path="/admin/me" element={<AdminPanel/>}/>
+                <Route path="/admin/store" element={<StoreTape/>}/>
+                <Route path="/admin/store/add" element={<AddStoreForm/>}/>
+                <Route path="/admin/store/update" element={<UpdateStoreForm/>}/>
+                <Route path="/admin/list_users" element={<UsersTape/>}/>
+                <Route path="/admin/news" element={<NewsTape/>}/>
+                <Route path="/admin/chats" element={<ChatsTape/>}/>
+                <Route path="/application_form" element={<ApplicationForm/>}/>
             </Routes>
         </BrowserRouter>
     );

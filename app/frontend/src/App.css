@@ -551,3 +551,16 @@
   padding: 5px;
   border-radius: 10px 10px 10px 0;
 }
+
+.textarea-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background-color: #303131;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: start;
+  padding: 10px;
+  color: #fff;
+}
