@@ -26,13 +26,17 @@ const Login = () => {
         const response = await fetch("/api/auth/token", requestOptions);
         const data = await response.json();
 
+        console.log(data);
+
         if (!response.ok) {
             setToken(null);
-            throw new Error("Failed to Login")
-        } else {
-            localStorage.setItem("token", data.access_token);
+            // Добавить уведомление о некорректности
         }
 
+        localStorage.setItem("token", data.access_token);
+    };
+
+    const getUserData = async () =>{
         const request = {
             method: 'GET',
             headers: {
@@ -58,16 +62,13 @@ const Login = () => {
         } catch (error) {
             console.error("Error fetching user data", error);
         }
-    };
+    }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        submitLogin();
-        if (!token) {
-            navigate("/");
-        } else {
-            navigate("/user/me");
-        }
+        await submitLogin();
+        await getUserData();
+        navigate("/user/me")
     }
 
     return (
