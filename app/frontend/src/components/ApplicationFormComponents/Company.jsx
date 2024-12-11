@@ -18,7 +18,7 @@ const Company = () => {
             body: JSON.stringify(payload)
         };
 
-        const response = await fetch("/application_form/company", requestOptions);
+        const response = await fetch("/api/application_form/company", requestOptions);
         if (!response.ok){
             console.log("Плохой запрос");
         } else {

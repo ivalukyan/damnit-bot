@@ -7,7 +7,7 @@ from uuid import UUID
 from auth.dependencies import get_current_user, get_db_session
 from auth.dependencies import get_user
 from auth.model import Profile
-from db.database import Users, News, Users_News, Messages, Chats
+from db.database import Users, News, Users_News, Messages, Chats, Store
 from profile.schemas import UpdateProfileSchema, UserNewsSchemas, NewsSchemas, UserMessagesSchemas
 
 router = APIRouter(
@@ -55,6 +55,11 @@ async def update_user_data(user: UpdateProfileSchema, db: Session = Depends(get_
     return_user.msg = "Данные обновлены"
     
     return return_user
+
+
+@router.get("/store")
+async def get_store_cards(db: Session = Depends(get_db_session)):
+    return db.query(Store).all()
 
 
 @router.post("/news", response_model=UserNewsSchemas)

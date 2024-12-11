@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+from matplotlib.pyplot import title
 from sqlalchemy.orm import Session
 
 from admin.schemas import AdminSchemas
@@ -51,23 +52,39 @@ async def update_user(user: UserSchemas, db: Session = Depends(get_db_session)):
     return {'user_id': user.user_id, 'msg': user.msg}
 
 
+@router.post("/store/get_by_id", response_model=StoreSchemas)
+async def get_by_id(card: StoreSchemas, db: Session = Depends(get_db_session)):
+    card_store = db.query(Store).filter(Store.id == card.card_id).first()
+    return StoreSchemas(card_id=card_store.id, title=card_store.title,
+                        short_info=card_store.short_info, info=card_store.info)
+
+
+@router.post("/store/add", response_model=StoreSchemas)
+async def add_store(card: StoreSchemas, db: Session = Depends(get_db_session)):
+    card_store = Store(title=card.title, short_info=card.short_info, info=card.info)
+    db.add(card_store)
+    db.commit()
+
+    return StoreSchemas(msg="Услуга успешно создана")
+
+
 @router.delete("/store/delete", response_model=StoreSchemas)
-async def delete_store(card: UserSchemas, db: Session = Depends(get_db_session)):
-    card_store = db.query(Store).filter(Store.id == card.store_id).first()
+async def delete_store(card: StoreSchemas, db: Session = Depends(get_db_session)):
+    card_store = db.query(Store).filter(Store.id == card.card_id).first()
     db.delete(card_store)
     db.commit()
     card.msg = "Карточка удалена"
-    return {'store_id': card.store_id, 'msg': card.msg}
+    return {'store_id': card.card_id, 'msg': card.msg}
 
 
 @router.put("/store/update", response_model=StoreSchemas)
 async def update_store(card: StoreSchemas, db: Session = Depends(get_db_session)):
-    db.query(Store).filter(Store.id == card.store_id).update({'title': card.title,
+    db.query(Store).filter(Store.id == card.card_id).update({'title': card.title,
                                                               'short_info': card.short_info,
                                                               'info': card.info})
     db.commit()
     card.msg = "Карточка обновлена"
-    return {'store_id': card.store_id, 'msg': card.msg}
+    return {'store_id': card.card_id, 'msg': card.msg}
 
 
 @router.delete("/news/delete", response_model=NewsSchemas)

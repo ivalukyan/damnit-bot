@@ -42,8 +42,9 @@ const UsersTape = () => {
     }
 
     const UpdateUser = (userId) => {
-        localStorage.setItem(userId, "user_id_update")
-        navigate(`/admin/user/update`);
+        console.log(userId)
+        localStorage.setItem("user_id_update", userId)
+        //navigate(`/admin/user/update`);
     }
 
     const handleSearch = (e) => {
@@ -89,12 +90,12 @@ const UsersTape = () => {
                                             <button
                                                 className="button is-primary"
                                                 id="UserUpdateButton"
-                                                onClick={() => DeleteUser(el.id)}
+                                                onClick={() => UpdateUser(el.id)}
                                             >Изменить</button>
                                             <button
                                                 className="button is-danger"
                                                 id="UserDeleteButton"
-                                                onClick={() => UpdateUser(el.id)}
+                                                onClick={() => DeleteUser(el.id)}
                                             >Удалить</button>
                                         </div>
                                     ))}

@@ -18,7 +18,7 @@ class UserSchemas(BaseModel):
 
 
 class StoreSchemas(BaseModel):
-    card_id: UUID
+    card_id: UUID | None = None
     title: str | None = None
     short_info: str | None = None
     info: str | None = None
