@@ -42,6 +42,7 @@ const Login = () => {
                 return;
             }
 
+
             const data = await response.json();
             localStorage.setItem("token", data.access_token);
             setToken(data.access_token);
@@ -53,6 +54,7 @@ const Login = () => {
                     Authorization: `Bearer ${data.access_token}`,
                 },
             };
+
 
             const userResponse = await fetch("/api/user/me", userRequestOptions);
 
@@ -73,7 +75,8 @@ const Login = () => {
             setMessage("Произошла ошибка. Попробуйте позже.");
             setNotification(true);
         }
-    };
+    }
+
 
     const closeModal = () => {
         setNotification(false);
@@ -83,6 +86,7 @@ const Login = () => {
         e.preventDefault();
         await submitLogin();
     };
+
 
     return (
         <div className="column">
