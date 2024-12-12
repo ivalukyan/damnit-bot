@@ -86,13 +86,29 @@ async def update_store(card: StoreSchemas, db: Session = Depends(get_db_session)
     return {'store_id': card.card_id, 'msg': card.msg}
 
 
+@router.post("/news/get_by_id", response_model=NewsSchemas)
+async def get_by_id_news(news: NewsSchemas, db: Session = Depends(get_db_session)):
+    news_card = db.query(News).filter(News.id == news.news_id).first()
+    return NewsSchemas(card_id=news_card.id, title=news_card.title,
+                        short_info=news_card.short_info, info=news_card.info)
+
+
+@router.post("/news/add", response_model=NewsSchemas)
+async def add_news(news: NewsSchemas, db: Session = Depends(get_db_session)):
+    card_news = News(title=news.title, short_info=news.short_info, info=news.info)
+    db.add(card_news)
+    db.commit()
+
+    return StoreSchemas(msg="Услуга успешно создана")
+
+
 @router.delete("/news/delete", response_model=NewsSchemas)
 async def delete_news(news: NewsSchemas, db: Session = Depends(get_db_session)):
-    news = db.query(News).filter(News.id == news.news_id).first()
-    db.delete(news)
+    news_card = db.query(News).filter(News.id == news.news_id).first()
+    db.delete(news_card)
     db.commit()
     news.msg = "Карточка новости удалена"
-    return {'news_id': news.news_id, 'msg': news.msg}
+    return {'news_id': news_card.id, 'msg': news.msg}
 
 
 @router.put("/news/update", response_model=NewsSchemas)

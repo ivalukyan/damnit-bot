@@ -26,7 +26,7 @@ class StoreSchemas(BaseModel):
 
 
 class NewsSchemas(BaseModel):
-    news_id: UUID
+    news_id: UUID | None = None
     title: str | None = None
     short_info: str | None = None
     info: str | None = None
