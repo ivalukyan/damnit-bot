@@ -12,7 +12,7 @@ const UserNews = () => {
 
     const closeModal = () => {
         setNotification(false);
-        //window.location.reload();
+        window.location.reload();
     }
 
     const getUserNews = async () => {

@@ -78,15 +78,17 @@ async def get_current_admin(db_session: Session = Depends(get_db_session), token
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         phone: str = payload.get("sub")
-
+        print(phone)
         if phone is None:
             raise credentials_exception
     except JWTError:
         raise credentials_exception
 
-    user = await get_admin(db_session, phone)
+    admin = await get_admin(db_session, phone)
 
-    return AdminSchemas(id=user.id, fullname=user.fullname, phone=user.phone, email=user.email)
+    print(admin)
+
+    return AdminSchemas(id=admin.id, fullname=admin.fullname, phone=admin.phone, email=admin.email)
 
 
 

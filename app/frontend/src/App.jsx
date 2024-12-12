@@ -14,6 +14,8 @@ import Chat from "./components/UserComponents/Chat";
 import AddStoreForm from "./components/AdminComponents/AddStoreForm";
 import UpdateStoreForm from "./components/AdminComponents/UpdStoreForm";
 import UserStore from "./components/UserComponents/Store";
+import AddNewsForm from "./components/AdminComponents/AddNewsForm";
+import UpdNewsForm from "./components/AdminComponents/UpdNewsForm";
 
 const App = () => {
     return (
@@ -31,6 +33,8 @@ const App = () => {
                 <Route path="/admin/store/update" element={<UpdateStoreForm/>}/>
                 <Route path="/admin/list_users" element={<UsersTape/>}/>
                 <Route path="/admin/news" element={<NewsTape/>}/>
+                <Route path="/admin/news/add" element={<AddNewsForm/>} />
+                <Route path="/admin/news/update" element={<UpdNewsForm/>} />
                 <Route path="/admin/chats" element={<ChatsTape/>}/>
                 <Route path="/application_form" element={<ApplicationForm/>}/>
             </Routes>
