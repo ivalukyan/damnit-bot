@@ -1,74 +1,88 @@
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [phone, setPhone] = useState("");
     const [token, setToken] = useState(localStorage.getItem("token"));
-    const [, setUserName] = useState(localStorage.getItem("fullname"));
-    const [, setUserPhone] = useState(localStorage.getItem("phone"));
-    const [, setUserEmail] = useState(localStorage.getItem("email"));
+    const [notification, setNotification] = useState(false);
+    const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
+    const validatePhone = (phone) => {
+        const phoneRegex = /^\+7\s?9\d{2}\s?\d{3}\s?\d{2}\s?\d{2}$/;
+        return phoneRegex.test(phone);
+    };
+
     const submitLogin = async () => {
+        if (!validatePhone(phone)) {
+            setMessage("Введите корректный номер телефона");
+            setNotification(true);
+            return;
+        }
 
         const payload = new URLSearchParams({
             username: phone,
-            password: "pass"
+            password: "pass" // Замените "pass" на реальный ввод пароля, если требуется
         });
 
         const requestOptions = {
             method: "POST",
-            headers: {"Content-Type": "application/x-www-form-urlencoded"},
-            body: payload
-        }
-
-        const response = await fetch("/api/auth/token", requestOptions);
-        const data = await response.json();
-
-        if (!response.ok) {
-            setToken(null);
-            throw new Error("Failed to Login")
-        } else {
-            localStorage.setItem("token", data.access_token);
-        }
-
-        const request = {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: payload,
         };
 
         try {
-            const response = await fetch("/api/user/me", request);
-            if (response.ok) {
-                const data = await response.json();
-                localStorage.setItem("fullname", data.fullname);
-                localStorage.setItem("phone", data.phone);
-                localStorage.setItem("email", data.email);
+            const response = await fetch("/api/auth/token", requestOptions);
+
+            if (!response.ok) {
+                const ans = await response.json();
+                setMessage("Ошибка авторизации: введите другой номер телофона");
+                setNotification(true);
+                setToken(null);
+                return;
+            }
+
+            const data = await response.json();
+            localStorage.setItem("token", data.access_token);
+            setToken(data.access_token);
+
+            const userRequestOptions = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${data.access_token}`,
+                },
+            };
+
+            const userResponse = await fetch("/api/user/me", userRequestOptions);
+
+            if (userResponse.ok) {
+                const userData = await userResponse.json();
+                localStorage.setItem("fullname", userData.fullname);
+                localStorage.setItem("phone", userData.phone);
+                localStorage.setItem("email", userData.email);
+                navigate("/user/me");
             } else {
                 console.error("Failed to fetch user data");
-                setUserPhone("");
-                setUserEmail("");
-                setUserName("");
+                setMessage("Не удалось загрузить данные пользователя");
+                setNotification(true);
                 setToken(null);
             }
         } catch (error) {
-            console.error("Error fetching user data", error);
+            console.error("Error during login request", error);
+            setMessage("Произошла ошибка. Попробуйте позже.");
+            setNotification(true);
         }
     };
 
-    const handleSubmit = (e) => {
+    const closeModal = () => {
+        setNotification(false);
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        submitLogin();
-        if (!token) {
-            navigate("/");
-        } else {
-            navigate("/user/me");
-        }
-    }
+        await submitLogin();
+    };
 
     return (
         <div className="column">
@@ -92,8 +106,14 @@ const Login = () => {
                     Войти
                 </button>
             </form>
+            {notification && (
+                <div className="notification is-danger">
+                    <button className="delete" onClick={closeModal}></button>
+                    {message}
+                </div>
+            )}
         </div>
-    )
+    );
 };
 
 export default Login;

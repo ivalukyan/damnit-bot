@@ -68,7 +68,13 @@ const UserStore = () => {
                     .map((el) => (
                         <div key={el.id} className="card">
                             <h4 className="title is-4">{el.title}</h4>
-                            <div className="mb-5">{el.short_info} руб.</div>
+                            <div className="mb-5" style={{
+                                display: "flex",
+                                padding: "3px",
+                                boxShadow: "rgba(0, 0, 0, 0.4) 0 5px 15px 0",
+                                borderRadius: "8px"
+                            }}
+                            >{el.short_info} руб.</div>
                             <button
                                 type="button"
                                 className="button is-primary"

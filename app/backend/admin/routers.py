@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends
-from matplotlib.pyplot import title
 from sqlalchemy.orm import Session
 
 from admin.schemas import AdminSchemas
