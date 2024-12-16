@@ -1,6 +1,5 @@
 from uuid import uuid4
 
-from pygments.lexer import default
 from sqlalchemy import (Column, String, UUID, ForeignKey, BigInteger, ARRAY)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
