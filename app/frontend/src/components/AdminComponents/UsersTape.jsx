@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 const UsersTape = () => {
@@ -13,13 +13,17 @@ const UsersTape = () => {
             headers: {"Content-Type": "application/json"}
         };
 
-        const response = await fetch("/admin/list_users", requestOptions);
+        const response = await fetch("/api/admin/list_users", requestOptions);
         if (!response.ok) {
             throw new Error("Failed to fetch list users");
         } else {
             const data = await response.json();
             setUsers(data);
         }
+    }
+
+    const redirectToAddUser = () => {
+        navigate("/admin/list_users/add");
     }
 
     const DeleteUser = async (userId) => {
@@ -33,7 +37,7 @@ const UsersTape = () => {
             })
         }
 
-        const response = await fetch("/admin/user/delete", requestOptions);
+        const response = await fetch("/api/admin/user/delete", requestOptions);
         if (!response.ok){
             throw new Error("Failed delete user");
         } else {
@@ -42,9 +46,9 @@ const UsersTape = () => {
     }
 
     const UpdateUser = (userId) => {
-        console.log(userId)
+        //console.log(userId)
         localStorage.setItem("user_id_update", userId)
-        //navigate(`/admin/user/update`);
+        navigate(`/admin/user/update`);
     }
 
     const handleSearch = (e) => {
@@ -69,6 +73,22 @@ const UsersTape = () => {
                                 </svg>
                             </a>
                         </nav>
+                        <div style={{margin: "0 11px"}}>
+                            <div style={{margin: "20px 13px"}}>
+                                <button
+                                    className="button"
+                                    style={{
+                                        width: "100%",
+                                        background: "#1ed760",
+                                        color: "#000",
+                                        border: "none",
+                                    }}
+                                    onClick={redirectToAddUser}
+                                >
+                                    Добавить
+                                </button>
+                            </div>
+                        </div>
                         <div className="column">
                             <div className="control">
                                 <input
@@ -91,12 +111,14 @@ const UsersTape = () => {
                                                 className="button is-primary"
                                                 id="UserUpdateButton"
                                                 onClick={() => UpdateUser(el.id)}
-                                            >Изменить</button>
+                                            >Изменить
+                                            </button>
                                             <button
                                                 className="button is-danger"
                                                 id="UserDeleteButton"
                                                 onClick={() => DeleteUser(el.id)}
-                                            >Удалить</button>
+                                            >Удалить
+                                            </button>
                                         </div>
                                     ))}
                             </div>

@@ -27,7 +27,7 @@ const UserPanel = () => {
         setSearchTerm(e.target.value.toLowerCase());
     };
 
-    console.log("user panel", token)
+    // сonsole.log("user panel", token)
 
     useEffect(() => {
         const getUserNews = async () => {
