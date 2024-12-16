@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from auth.dependencies import authenticate_user, get_db_session, get_user, authenticate_admin
 from auth.model import Token, UserSchemas
 from auth.utils import create_access_token
-from db.database import Users
+from db.database import Notifications
 
 router = APIRouter(
     tags=['Авторизация'],
@@ -40,12 +40,16 @@ async def sign_up(user: UserSchemas, db_session: Session = Depends(get_db_sessio
     if user_db:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User already exists")
 
-    user = Users(fullname=user.fullname, phone=user.phone, email=user.email)
-    db_session.add(user)
+    notification = Notifications(types="new_user",
+                                 data=[user.fullname, user.email, user.phone],
+                                 msg="Новый пользователь")
+    db_session.add(notification)
     db_session.commit()
-    db_session.refresh(user)
+    db_session.refresh(notification)
 
-    access_token = await create_access_token(data={"sub": user.phone})
+    #access_token = await create_access_token(data={"sub": user.phone})
 
-    return UserSchemas(fullname=user.fullname, phone=user.phone,  email=user.email,
-                       access_token=access_token, msg="Пользователь успешно зарегистрирован")
+    return UserSchemas(fullname=user.fullname,
+                       phone=user.phone,
+                       email=user.email,
+                       msg="Запрос на регистрацию отправлен")

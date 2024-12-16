@@ -10,10 +10,10 @@ class AdminSchemas(BaseModel):
 
 
 class UserSchemas(BaseModel):
-    user_id: UUID
-    fullname: str | None
-    phone: str | None
-    email: str | None
+    user_id: UUID | None = None
+    fullname: str | None = None
+    phone: str | None = None
+    email: str | None = None
     msg: str | None = None
 
 

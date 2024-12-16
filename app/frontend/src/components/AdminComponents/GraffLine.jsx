@@ -9,21 +9,47 @@ import {
     Tooltip,
     Legend,
 } from "chart.js";
+import { useEffect, useState } from "react";
 
 // Register chart.js components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const UsersLine = () => {
+    const [cntUsers, setCntUsers] = useState([]);
+
+    useEffect(() => {
+        const getCountUsers = async () => {
+            try {
+                const response = await fetch("/api/admin/user/count", {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log(data);
+                setCntUsers(data.data || []);
+            } catch (error) {
+                console.error("Failed to fetch user count:", error);
+            }
+        };
+
+        getCountUsers();
+    }, []);
+
     const lineChartData = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [
             {
-                data: [0, 1, 10, 30],
+                data: cntUsers,
                 label: "Users",
-                borderColor: "#3333ff",
-                backgroundColor: "rgba(51, 51, 255, 0.5)",
+                borderColor: "#1ed760",
+                backgroundColor: "rgba(30, 215, 96, 0.5)",
                 fill: true,
-                tension: 0.5, // Updated (use 'tension' instead of 'lineTension')
+                tension: 0.5,
             },
         ],
     };
@@ -43,6 +69,21 @@ const UsersLine = () => {
             legend: {
                 display: true,
                 position: "top",
+                labels: {
+                    color: "#fff",
+                },
+            },
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: "#fff",
+                },
+            },
+            y: {
+                ticks: {
+                    color: "#fff",
+                },
             },
         },
     };

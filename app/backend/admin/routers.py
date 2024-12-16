@@ -5,11 +5,13 @@ from admin.schemas import AdminSchemas
 from auth.dependencies import get_current_admin
 
 from auth.dependencies import get_db_session
-from db.database import Users, News, Store
+from db.database import Users, News, Store, Notifications
 
 from admin.schemas import UserSchemas, StoreSchemas, NewsSchemas
 
 from db.database import Chats
+
+from datetime import datetime
 
 router = APIRouter(
     prefix="/admin",
@@ -32,13 +34,28 @@ async def get_chats(db: Session = Depends(get_db_session)):
     return db.query(Chats).all()
 
 
+@router.get("/user/count")
+async def get_user_count(db: Session = Depends(get_db_session)):
+    cnt = db.query(Users).count()
+    current_month = datetime.now().month
+    if len([cnt]) < current_month:
+        arr = (current_month-1)*[0]+[cnt]
+    return {'data': arr}
+
+
+@router.post("/user/get_by_id", response_model=UserSchemas)
+async def get_user_by_id(user: UserSchemas, db: Session = Depends(get_db_session)):
+    user_db = db.query(Users).filter(Users.id == user.user_id).first()
+    return UserSchemas(id=user_db.id, fullname=user_db.fullname, email=user_db.email, phone=user_db.phone)
+
+
 @router.delete("/user/delete", response_model=UserSchemas)
 async def delete_user(user: UserSchemas, db: Session = Depends(get_db_session)):
-    user = db.query(Users).filter(Users.id == user.user_id).first()
-    db.delete(user)
+    user_db = db.query(Users).filter(Users.id == user.user_id).first()
+    db.delete(user_db)
     db.commit()
     user.msg = "Пользователь удален"
-    return {'user_id': user.user_id, 'msg': user.msg}
+    return {'user_id': user_db.id, 'msg': user.msg}
 
 
 @router.put("/user/update", response_model=UserSchemas)
@@ -124,3 +141,30 @@ async def update_news(news: NewsSchemas, db: Session = Depends(get_db_session)):
 @router.get("/news")
 async def get_news(db: Session = Depends(get_db_session)):
     return db.query(News).all()
+
+
+@router.get("/notifications")
+async def get_notifications(db: Session = Depends(get_db_session)):
+    return db.query(Notifications).filter(Notifications.types == "new_user").all()
+
+
+@router.post("/notifications/approve", response_model=UserSchemas)
+async def approve_user(user: UserSchemas, db: Session = Depends(get_db_session)):
+    user_approved = Users(fullname=user.fullname, phone=user.phone, email=user.email)
+    db.add(user_approved)
+    db.commit()
+
+    notifications = db.query(Notifications).filter(Notifications.id == user.user_id).first()
+    db.delete(notifications)
+    db.commit()
+
+    return UserSchemas(msg="Пользователь добавлен")
+
+
+@router.post("/notifications/rejection", response_model=UserSchemas)
+async def abort_user(user: UserSchemas, db: Session = Depends(get_db_session)):
+    user_rejected = db.query(Notifications).filter(Notifications.id == user.user_id).first()
+    db.delete(user_rejected)
+    db.commit()
+
+    return UserSchemas(msg="Пользователь откланен")
