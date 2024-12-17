@@ -3,9 +3,15 @@ import React, {useEffect, useState} from "react";
 const UserStore = () => {
 
     const [cards, setCards] = useState([]);
+    const [userId] = useState(localStorage.getItem("awesomeUserId"));
+    const [fullname] = useState(localStorage.getItem("fullname"));
+    const [phone] = useState(localStorage.getItem("phone"));
+    const [email] = useState(localStorage.getItem("email"));
     const [isModalActive, setModalActive] = useState(false);
     const [selectedCard, setSelectedCard] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
+    const [isActiveNotification, setIsActiveNotification] = useState(false);
+    const [message, setMessage] = useState("");
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value.toLowerCase());
@@ -35,9 +41,34 @@ const UserStore = () => {
         getCards();
     }, []);
 
-    const handleCard = () => {
-        // Сделать заказ
+    const handleCard = async (titleCard, priceCard) => {
+        const requestOptions = {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                fullname: fullname,
+                phone: phone,
+                email: email,
+                title: titleCard,
+                price: priceCard,
+                user_id: userId
+            })
+        }
+
+        try {
+            await fetch("/api/user/store/notification", requestOptions);
+            setMessage("Заказ отправлен на рассмотрение администратору");
+            setIsActiveNotification(true);
+        } catch (e) {
+            setMessage("Ошибка отправки заявки");
+            setIsActiveNotification(true);
+            console.error("Failed send notification", e);
+        }
     }
+
+    const removeNotification = () => {
+        setIsActiveNotification(false);
+    };
 
     return (
         <>
@@ -50,6 +81,12 @@ const UserStore = () => {
                     </svg>
                 </a>
             </nav>
+            {isActiveNotification && (
+                <div className="notification is-info" id="NotificationDiv">
+                    <button className="delete" onClick={removeNotification}></button>
+                    <p>{message}</p>
+                </div>
+            )}
             <div className="control-search" style={{margin: "25px 10px"}}>
                 <input
                     type="text"
@@ -74,7 +111,8 @@ const UserStore = () => {
                                 boxShadow: "rgba(0, 0, 0, 0.4) 0 5px 15px 0",
                                 borderRadius: "8px"
                             }}
-                            >{el.short_info} руб.</div>
+                            >{el.short_info} руб.
+                            </div>
                             <button
                                 type="button"
                                 className="button is-primary"
@@ -104,9 +142,10 @@ const UserStore = () => {
                                 {selectedCard.info}
                             </div>
                             <div className="modal-footer">
-                                <button type="button" onClick={() => handleCard(selectedCard.id)}
+                                <button type="button"
+                                        onClick={() => handleCard(selectedCard.title, selectedCard.short_info)}
                                         className="button is-info" id="SaveNewsBtn">
-                                    Заказать услугу
+                                    Сделать заказ
                                 </button>
                             </div>
                         </div>

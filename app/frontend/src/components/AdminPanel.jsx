@@ -8,7 +8,7 @@ const AdminPanel = () => {
 
     useEffect(() => {
         if (!token) {
-            navigate("/");
+            navigate("/admin/login");
         }
     }, [token, navigate]);
 

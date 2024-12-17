@@ -56,6 +56,10 @@ const StoreTape = () => {
         }
     }
 
+    const handleNotification = () => {
+        navigate("/admin/store/notification")
+    }
+
     useEffect(() => {
         getStoreInfo();
     }, []);
@@ -84,6 +88,23 @@ const StoreTape = () => {
                     onClick={AddStoreCard}
                     type="button"
                 >Добавить
+                </button>
+            </div>
+            <div style={{margin: "20px 13px"}}>
+                <button
+                    className="button"
+                    style={{
+                        width: "100%",
+                        border: "none",
+                        outline: "none",
+                        color: "#000",
+                        backgroundColor: "#1d94f8",
+                        borderRadius: "6px"
+                    }}
+                    onClick={handleNotification}
+                    type="button"
+                >
+                    Уведомления
                 </button>
             </div>
             <div className="column">

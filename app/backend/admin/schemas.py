@@ -38,3 +38,9 @@ class NewsSchemas(BaseModel):
     short_info: str | None = None
     info: str | None = None
     msg: str | None = None
+
+
+class NotificationSchemas(BaseModel):
+    notification_id: UUID | None = None
+    chat_id: UUID | None = None
+    msg: str | None = None

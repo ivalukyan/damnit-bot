@@ -29,3 +29,13 @@ class UserMessagesSchemas(BaseModel):
     chat_id: UUID | None = None
     content: str | None = None
     role: str | None = None
+
+
+class StoreNotificationsSchema(BaseModel):
+    fullname: str | None = None
+    email: str | None = None
+    phone: str | None = None
+    title: str | None = None
+    price: str | None = None
+    user_id: UUID | None = None
+    msg: str | None = None

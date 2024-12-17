@@ -7,8 +7,9 @@ from uuid import UUID
 from auth.dependencies import get_current_user, get_db_session
 from auth.dependencies import get_user
 from auth.model import Profile
-from db.database import Users, News, Users_News, Messages, Chats, Store
-from profile.schemas import UpdateProfileSchema, UserNewsSchemas, NewsSchemas, UserMessagesSchemas
+from db.database import Users, News, Users_News, Messages, Chats, Store, Notifications
+from profile.schemas import (UpdateProfileSchema, UserNewsSchemas,
+                             NewsSchemas, UserMessagesSchemas, StoreNotificationsSchema)
 
 router = APIRouter(
     tags=["Профиль"],
@@ -95,6 +96,15 @@ async def delete_user_news(user_news: UserNewsSchemas, db: Session = Depends(get
     db.commit()
 
     return UserNewsSchemas(user_id=user_news.user_id, msg="Статья удалена из избранных.")
+
+
+@router.post("/store/notification", response_model=StoreNotificationsSchema)
+async def send_store_notification(notification: StoreNotificationsSchema, db: Session = Depends(get_db_session)):
+    store_not = Notifications(types="store", data=[notification.fullname, notification.phone, notification.email,
+                                                   notification.title, notification.price, notification.user_id])
+    db.add(store_not)
+    db.commit()
+    return StoreNotificationsSchema(msg="Сообщение отправлено")
 
 
 @router.get("/messages/{chat_id}")

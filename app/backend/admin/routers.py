@@ -7,7 +7,7 @@ from auth.dependencies import get_current_admin
 from auth.dependencies import get_db_session
 from db.database import Users, News, Store, Notifications, Stats
 
-from admin.schemas import UserSchemas, StoreSchemas, NewsSchemas, ChatSchemas
+from admin.schemas import UserSchemas, StoreSchemas, NewsSchemas, ChatSchemas, NotificationSchemas
 
 from db.database import Chats, Messages
 
@@ -135,6 +135,35 @@ async def update_store(card: StoreSchemas, db: Session = Depends(get_db_session)
     db.commit()
     card.msg = "Карточка обновлена"
     return {'store_id': card.card_id, 'msg': card.msg}
+
+
+@router.get("/store/notifications")
+async def get_stores_notification(db: Session = Depends(get_db_session)):
+    return db.query(Notifications).filter(Notifications.types == "store").all()
+
+
+@router.post("/store/notifications/approve", response_model=NotificationSchemas)
+async def approve_store(notification: NotificationSchemas, db: Session = Depends(get_db_session)):
+
+    notifications = db.query(Notifications).filter(Notifications.id == notification.notification_id).first()
+    db.delete(notifications)
+    db.commit()
+
+    chat_story = Messages(chat_id=notification.chat_id, content=notification.msg, role="admin")
+    db.add(chat_story)
+    db.commit()
+
+    return NotificationSchemas(msg="Заказа обработан")
+
+
+@router.post("/store/notifications/rejection", response_model=NotificationSchemas)
+async def approve_store(notification: NotificationSchemas, db: Session = Depends(get_db_session)):
+
+    notifications = db.query(Notifications).filter(Notifications.id == notification.notification_id).first()
+    db.delete(notifications)
+    db.commit()
+
+    return NotificationSchemas(msg="Заказ откланен")
 
 
 @router.post("/news/get_by_id", response_model=NewsSchemas)

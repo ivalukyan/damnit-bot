@@ -19,6 +19,7 @@ import UpdNewsForm from "./components/AdminComponents/UpdNewsForm";
 import AddUsersForm from "./components/AdminComponents/AddUsersForm";
 import UpdateUserForm from "./components/AdminComponents/UpdUserForm";
 import AdminChat from "./components/AdminComponents/AdminChat";
+import StoreNotifications from "./components/AdminComponents/StoreNotifications";
 
 const App = () => {
     return (
@@ -34,6 +35,7 @@ const App = () => {
                 <Route path="/admin/store" element={<StoreTape/>}/>
                 <Route path="/admin/store/add" element={<AddStoreForm/>}/>
                 <Route path="/admin/store/update" element={<UpdateStoreForm/>}/>
+                <Route path="/admin/store/notification" element={<StoreNotifications/>}/>
                 <Route path="/admin/list_users" element={<UsersTape/>}/>
                 <Route path="/admin/list_users/update" element={<UpdateUserForm/>}/>
                 <Route path="/admin/list_users/add" element={<AddUsersForm />} />
