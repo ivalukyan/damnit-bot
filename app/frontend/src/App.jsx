@@ -18,6 +18,7 @@ import AddNewsForm from "./components/AdminComponents/AddNewsForm";
 import UpdNewsForm from "./components/AdminComponents/UpdNewsForm";
 import AddUsersForm from "./components/AdminComponents/AddUsersForm";
 import UpdateUserForm from "./components/AdminComponents/UpdUserForm";
+import AdminChat from "./components/AdminComponents/AdminChat";
 
 const App = () => {
     return (
@@ -40,6 +41,7 @@ const App = () => {
                 <Route path="/admin/news/add" element={<AddNewsForm/>} />
                 <Route path="/admin/news/update" element={<UpdNewsForm/>} />
                 <Route path="/admin/chats" element={<ChatsTape/>}/>
+                <Route path="/admin/chat" element={<AdminChat/>}/>
                 <Route path="/application_form" element={<ApplicationForm/>}/>
             </Routes>
         </BrowserRouter>

@@ -9,6 +9,13 @@ class AdminSchemas(BaseModel):
     email: str
 
 
+class ChatSchemas(BaseModel):
+    chat_id: UUID | None = None
+    recipient_id: str | None = None
+    content: str | None = None
+    role: str | None = None
+
+
 class UserSchemas(BaseModel):
     user_id: UUID | None = None
     fullname: str | None = None

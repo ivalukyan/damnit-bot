@@ -1,6 +1,6 @@
 from uuid import uuid4
 
-from sqlalchemy import (Column, String, UUID, ForeignKey, BigInteger, ARRAY)
+from sqlalchemy import (Column, String, UUID, ForeignKey, BigInteger, ARRAY, Integer)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
@@ -87,7 +87,15 @@ class Notifications(Base):
     msg = Column(String, nullable=True)
 
 
+class Stats(Base):
+    __tablename__ = 'stats'
+    id = Column(UUID, primary_key=True, default=uuid4)
+    data = Column(ARRAY(Integer), nullable=True)
+    month = Column(Integer, nullable=True)
+    year = Column(Integer, nullable=True)
+
+
 
 if __name__ == '__main__':
-    Base.metadata.drop_all(engine)
+    #Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)

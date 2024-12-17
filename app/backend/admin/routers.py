@@ -5,11 +5,11 @@ from admin.schemas import AdminSchemas
 from auth.dependencies import get_current_admin
 
 from auth.dependencies import get_db_session
-from db.database import Users, News, Store, Notifications
+from db.database import Users, News, Store, Notifications, Stats
 
-from admin.schemas import UserSchemas, StoreSchemas, NewsSchemas
+from admin.schemas import UserSchemas, StoreSchemas, NewsSchemas, ChatSchemas
 
-from db.database import Chats
+from db.database import Chats, Messages
 
 from datetime import datetime
 
@@ -22,6 +22,15 @@ router = APIRouter(
 @router.get("/me", response_model=AdminSchemas)
 async def get_admin(admin: AdminSchemas = Depends(get_current_admin)):
     return admin
+
+
+@router.post("/messages", response_model=ChatSchemas)
+async def save_chat(chat: ChatSchemas, db: Session = Depends(get_db_session)):
+    message = Messages(chat_id=chat.chat_id, content=chat.content, role=chat.role)
+    db.add(message)
+    db.commit()
+    return ChatSchemas(chat_id=chat.chat_id, content=chat.content, role=chat.role)
+
 
 # Пользователь
 @router.get("/list_users")
@@ -36,11 +45,36 @@ async def get_chats(db: Session = Depends(get_db_session)):
 
 @router.get("/user/count")
 async def get_user_count(db: Session = Depends(get_db_session)):
-    cnt = db.query(Users).count()
-    current_month = datetime.now().month
-    if len([cnt]) < current_month:
-        arr = (current_month-1)*[0]+[cnt]
-    return {'data': arr}
+
+    now_year = datetime.now().year
+    now_month = datetime.now().month
+
+    stats_month = db.query(Stats).filter(Stats.year == now_year).first()
+    if stats_month is None:
+        cnt_users = db.query(Users).count()
+        arr = (now_month-1)*[0]+[cnt_users]
+        db.add(Stats(year=now_year, data=arr, month=now_month))
+        db.commit()
+        return {'data': arr}
+
+
+    if stats_month.month != now_month:
+        old_data = db.query(Stats).filter(Stats.year == now_year).first()
+        count_users = db.query(Users).count()
+        arr = old_data.data + [count_users]
+        db.query(Stats).filter(Stats.year == now_year).update({'data': arr, 'month': now_month})
+        db.commit()
+        return {'data': arr}
+
+    if stats_month.data[now_month-1] != db.query(Users).count():
+        cnt_users = db.query(Users).count()
+        arr = stats_month.data
+        arr[now_month-1] = cnt_users
+        db.query(Stats).filter(Stats.year == now_year).update({'data': arr})
+        db.commit()
+        return {'data': arr}
+
+    return {'data': stats_month.data}
 
 
 @router.post("/user/get_by_id", response_model=UserSchemas)

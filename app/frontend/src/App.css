@@ -393,17 +393,12 @@
   color: #303131;
 }
 
-.chat-body{
-  margin: 10px 0 0 4px;
-  max-width: 70%;
-  word-wrap: break-word;
-  font-size: 18px;
-  font-weight: 500;
+.chat-body {
   display: flex;
   flex-direction: column;
-  position: relative;
+  height: calc(100vh - 120px); /* Учитывая высоту шапки и поля ввода */
   overflow-y: auto;
-  max-height: calc(100vh - 145px);
+  padding: 10px;
 }
 
 /* хром, сафари */
@@ -526,31 +521,42 @@
 
 .sent {
   display: flex;
+  justify-content: flex-end;
   padding: 3px;
   margin-top: 10px;
-  margin-left: auto;
   width: 100%;
 }
 
 .receive {
   display: flex;
+  justify-content: flex-start;
   padding: 3px;
   margin-top: 10px;
-  margin-right: auto;
   width: 100%;
 }
 
-.sent p{
-  background-color: #303131;
-  padding: 5px;
-  border-radius: 10px 10px 10px 0;
+.sent p {
+  background-color: #3e6a97; /* Светлый синий */
+  color: #fff;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 15px 15px 0 15px;
+  max-width: 60%;
+  word-wrap: break-word;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.receive p{
-  background-color: #303131;
-  padding: 5px;
-  border-radius: 10px 10px 10px 0;
+.receive p {
+  background-color: #213040; /* Светло-серый */
+  color: #fff;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 15px 15px 15px 0;
+  max-width: 60%;
+  word-wrap: break-word;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 
 .textarea-input {
   width: 100%;
