@@ -20,7 +20,7 @@ async def home_menu(message: Message):
         inline_keyboard=[
             [InlineKeyboardButton(text='О компании', callback_data='company_info')],
             [InlineKeyboardButton(text='FAQ/Контакты', callback_data='faq')],
-            [InlineKeyboardButton(text='ЛК', web_app=WebAppInfo(url='https://ivalukyan-damnit-bot-14d7.twc1.net'))],
+            [InlineKeyboardButton(text='ЛК', web_app=WebAppInfo(url='https://ivalukyan-frontend-damnitbot-da62.twc1.net'))],
         ]
     ))
 
@@ -34,7 +34,7 @@ async def quick_order(call: CallbackQuery):
         inline_keyboard=[
             [InlineKeyboardButton(text='О компании', callback_data='company_info')],
             [InlineKeyboardButton(text='FAQ/Контакты', callback_data='faq')],
-            [InlineKeyboardButton(text='ЛК', web_app=WebAppInfo(url="https://ivalukyan-damnit-bot-14d7.twc1.net"))],
+            [InlineKeyboardButton(text='ЛК', web_app=WebAppInfo(url="https://ivalukyan-frontend-damnitbot-da62.twc1.net"))],
 
         ]
     ))
