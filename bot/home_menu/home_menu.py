@@ -15,11 +15,11 @@ router = Router()
 
 @router.message(CommandStart())
 async def home_menu(message: Message):
-    await message.answer('Добрый день, {}'.format(message.from_user.first_name), reply_markup=InlineKeyboardMarkup(
+    await message.answer('Здравствуйте, {}'.format(message.from_user.first_name), reply_markup=InlineKeyboardMarkup(
         inline_keyboard=[
             [InlineKeyboardButton(text='О компании', callback_data='company_info')],
             [InlineKeyboardButton(text='FAQ/Контакты', callback_data='faq')],
-            [InlineKeyboardButton(text='ЛК', web_app=WepAppInfo(url=""))],
+            [InlineKeyboardButton(text='ЛК', web_app=WepAppInfo(url="ivalukyan-damnit-bot-14d7.twc1.net"))],
         ]
     ))
 
@@ -33,10 +33,7 @@ async def quick_order(call: CallbackQuery):
         inline_keyboard=[
             [InlineKeyboardButton(text='О компании', callback_data='company_info')],
             [InlineKeyboardButton(text='FAQ/Контакты', callback_data='faq')],
-            [InlineKeyboardButton(text='ЛК', callback_data='authorization')],
-            [InlineKeyboardButton(text='Оформить заявку', callback_data='make_application')],
-            [InlineKeyboardButton(text='Новости', callback_data='news')],
-            [InlineKeyboardButton(text='Горячая линия', callback_data='hotline')],
-            [InlineKeyboardButton(text='Смена языка', callback_data='changing_language')]
+            [InlineKeyboardButton(text='ЛК', web_app=WebAppInfo(url="ivalukyan-damnit-bot-14d7.twc1.net"))],
+
         ]
     ))
