@@ -6,7 +6,8 @@ from aiogram.filters import CommandStart
 from aiogram.types import (
     Message,
     InlineKeyboardMarkup,
-    InlineKeyboardButton, CallbackQuery,
+    InlineKeyboardButton,
+    CallbackQuery,
     WebAppInfo
 )
 
@@ -19,7 +20,7 @@ async def home_menu(message: Message):
         inline_keyboard=[
             [InlineKeyboardButton(text='О компании', callback_data='company_info')],
             [InlineKeyboardButton(text='FAQ/Контакты', callback_data='faq')],
-            [InlineKeyboardButton(text='ЛК', web_app=WepAppInfo(url="https://ivalukyan-damnit-bot-14d7.twc1.net"))],
+            [InlineKeyboardButton(text='ЛК', web_app=WepAppInfo(url='https://ivalukyan-damnit-bot-14d7.twc1.net'))],
         ]
     ))
 

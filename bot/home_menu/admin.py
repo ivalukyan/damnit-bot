@@ -6,7 +6,8 @@ from aiogram.filters import Command
 from aiogram.types import (
     Message,
     InlineKeyboardMarkup,
-    InlineKeyboardButton, CallbackQuery,
+    InlineKeyboardButton,
+    CallbackQuery,
     WebAppInfo
 )
 
