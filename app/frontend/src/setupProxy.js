@@ -4,19 +4,19 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'https://ivalukyan-damnit-bot-a1d6.twc1.net',
+            target: 'https://ivalukyan-backend-damnitbot-12c1.twc1.net',
             changeOrigin: true,
             pathRewrite: {'^/api': ''},
         })
     );
 
     app.use(
-        '/ws',
+        '/wss',
         createProxyMiddleware({
-            target: 'wss://ivalukyan-damnit-bot-a1d6.twc1.net',
+            target: 'wss://ivalukyan-backend-damnitbot-12c1.twc1.net',
             ws: true,
             changeOrigin: true,
-            pathRewrite: { '^/ws': '' },
+            pathRewrite: { '^/wss': '' },
         })
     );
 };
