@@ -6,7 +6,8 @@ from aiogram.filters import CommandStart
 from aiogram.types import (
     Message,
     InlineKeyboardMarkup,
-    InlineKeyboardButton, CallbackQuery
+    InlineKeyboardButton, CallbackQuery,
+    WebAppInfo
 )
 
 router = Router()
@@ -18,11 +19,7 @@ async def home_menu(message: Message):
         inline_keyboard=[
             [InlineKeyboardButton(text='О компании', callback_data='company_info')],
             [InlineKeyboardButton(text='FAQ/Контакты', callback_data='faq')],
-            [InlineKeyboardButton(text='ЛК', callback_data='authorization')],
-            [InlineKeyboardButton(text='Оформить заявку', callback_data='make_application')],
-            [InlineKeyboardButton(text='Новости', callback_data='news')],
-            [InlineKeyboardButton(text='Горячая линия', callback_data='hotline')],
-            [InlineKeyboardButton(text='Смена языка', callback_data='changing_language')]
+            [InlineKeyboardButton(text='ЛК', web_app=WepAppInfo(url=""))],
         ]
     ))
 

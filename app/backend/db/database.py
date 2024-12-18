@@ -1,11 +1,15 @@
+import os
 from uuid import uuid4
 
+from dotenv import load_dotenv
 from sqlalchemy import (Column, String, UUID, ForeignKey, BigInteger, ARRAY, Integer)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 
-db_url = f"postgresql://postgres:postgres@localhost:5432/damnit_bot"
+load_dotenv()
+
+db_url = os.getenv("DATABASE_URL")
 
 engine = create_engine(db_url, pool_pre_ping=True, pool_recycle=300)
 
