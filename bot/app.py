@@ -6,12 +6,12 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 
-from bot.bot_conf import bot_token
+from bot_conf import bot_token
 
-from bot.home_menu.home_menu import router as home_menu_router
-from bot.home_menu.company_info import router as company_info_router
-from bot.home_menu.faq import router as faq_router
-from bot.home_menu.admin import router as admin_router
+from home_menu.home_menu import router as home_menu_router
+from home_menu.company_info import router as company_info_router
+from home_menu.faq import router as faq_router
+from home_menu.admin import router as admin_router
 
 
 async def main():

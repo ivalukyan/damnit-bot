@@ -1,5 +1,5 @@
-# Используем официальный образ Node.js для сборки приложения
-FROM node:18 AS build
+# Используем официальный образ Node.js
+FROM node:18
 
 # Устанавливаем рабочую директорию внутри контейнера
 WORKDIR /app
@@ -16,17 +16,11 @@ COPY . .
 # Собираем приложение
 RUN npm run build
 
-# Используем nginx для раздачи статических файлов
-FROM nginx:alpine
+# Устанавливаем serve для раздачи статических файлов
+RUN npm install -g serve
 
-# Копируем собранное приложение в стандартный каталог nginx
-COPY --from=build /app/build /usr/share/nginx/html
+# Открываем порт 3000
+EXPOSE 3000
 
-# Копируем конфигурационный файл nginx (опционально, если нужно настроить nginx)
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Открываем порт 80
-EXPOSE 80
-
-# Запускаем nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Запускаем приложение с использованием serve
+CMD ["serve", "-s", "build", "-l", "3000"]

@@ -10,4 +10,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
+EXPOSE 7070
+
 CMD ["python", "app.py", "run"]
