@@ -4,7 +4,7 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'http://localhost:8000',
+            target: 'https://ivalukyan-damnit-bot-a1d6.twc1.net',
             changeOrigin: true,
             pathRewrite: {'^/api': ''},
         })
@@ -13,7 +13,7 @@ module.exports = function (app) {
     app.use(
         '/ws',
         createProxyMiddleware({
-            target: 'ws://localhost:8000',
+            target: 'wss://ivalukyan-damnit-bot-a1d6.twc1.net',
             ws: true,
             changeOrigin: true,
             pathRewrite: { '^/ws': '' },

@@ -9,7 +9,7 @@ const AdminChat = () => {
     const socketRef = useRef(null);
 
     useEffect(() => {
-        const socket = new WebSocket(`ws://localhost:8000/user/chat/${userId}`);
+        const socket = new WebSocket(`ws://ivalukyan-damnit-bot-a1d6.twc1.net/user/chat/${userId}`);
         socketRef.current = socket;
 
         socket.onopen = () => setSocketStatus("Connected");
