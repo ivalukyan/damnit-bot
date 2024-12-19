@@ -29,7 +29,7 @@ const UserStore = () => {
                 headers: {"Content-Type": "application/json"},
             };
 
-            const response = await fetch("/api/user/store");
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/user/store");
 
             if (!response.ok) {
                 throw new Error("Failed loading user news");
@@ -56,7 +56,7 @@ const UserStore = () => {
         }
 
         try {
-            await fetch("/api/user/store/notification", requestOptions);
+            await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/user/store/notification", requestOptions);
             setMessage("Заказ отправлен на рассмотрение администратору");
             setIsActiveNotification(true);
         } catch (e) {

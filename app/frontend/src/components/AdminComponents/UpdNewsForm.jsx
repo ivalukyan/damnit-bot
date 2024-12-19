@@ -14,7 +14,7 @@ const UpdateNewsForm = () => {
     useEffect(() => {
         const getCardData = async () => {
             try {
-                const response = await fetch("/api/admin/news/get_by_id", {
+                const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/news/get_by_id", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ news_id: newsId }),
@@ -39,7 +39,7 @@ const UpdateNewsForm = () => {
 
     const sendNewsForm = async () => {
         try {
-            const response = await fetch("/api/admin/news/update", {
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/news/update", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

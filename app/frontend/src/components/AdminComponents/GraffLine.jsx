@@ -20,7 +20,7 @@ const UsersLine = () => {
     useEffect(() => {
         const getCountUsers = async () => {
             try {
-                const response = await fetch("/api/admin/user/count", {
+                const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/user/count", {
                     method: "GET",
                     headers: { "Content-Type": "application/json" },
                 });

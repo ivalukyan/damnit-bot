@@ -34,7 +34,7 @@ const AdminChat = () => {
                     headers: {"Content-Type": "application/json"}
                 }
 
-                const response = await fetch(`/api/user/messages/${userId}`, requestOptions);
+                const response = await fetch(`https://ivalukyan-backend-damnitbot-12c1.twc1.net/user/messages/${userId}`, requestOptions);
 
                 if (!response.ok) {
                     throw new Error("Failed get user story messages");

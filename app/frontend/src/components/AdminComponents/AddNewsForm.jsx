@@ -17,7 +17,7 @@ const AddNewsForm = () => {
             })
         }
 
-        const response = await fetch("/api/admin/news/add", requestOptions);
+        const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/news/add", requestOptions);
         if (!response.ok) {
             throw new Error("Failed send data in store form");
         }

@@ -12,7 +12,7 @@ const [token] = useState(localStorage.getItem("token"));
         setError(null);
 
         try {
-            const response = await fetch("/api/admin/store/notifications", {
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/store/notifications", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
             });
@@ -37,7 +37,7 @@ const [token] = useState(localStorage.getItem("token"));
 
     const approveUser = useCallback(async (list, not_id) => {
         try {
-            const response = await fetch("/api/admin/store/notifications/approve", {
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/store/notifications/approve", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -63,7 +63,7 @@ const [token] = useState(localStorage.getItem("token"));
 
     const abortUser = useCallback(async (not_id) => {
         try {
-            const response = await fetch("/api/admin/store/notifications/rejection", {
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/store/notifications/rejection", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

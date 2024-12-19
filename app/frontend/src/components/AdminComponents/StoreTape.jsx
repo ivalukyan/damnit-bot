@@ -12,7 +12,7 @@ const StoreTape = () => {
         }
 
         try{
-            const response = await fetch("/api/store/", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/store/", requestOptions);
             if (!response.ok){
                 console.error(response);
             } else {
@@ -46,7 +46,7 @@ const StoreTape = () => {
             })
         };
 
-        const response = await fetch("/api/admin/store/delete", requestOptions);
+        const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/store/delete", requestOptions);
         if (!response.ok){
             throw new Error("Failed delete card");
         } else {

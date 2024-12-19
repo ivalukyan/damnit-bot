@@ -17,7 +17,7 @@ const AddStoreForm = () => {
             })
         }
 
-        const response = await fetch("/api/admin/store/add", requestOptions);
+        const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/store/add", requestOptions);
         if (!response.ok){
             throw new Error("Failed send data in store form");
         }

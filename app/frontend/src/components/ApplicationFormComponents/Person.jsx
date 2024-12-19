@@ -22,7 +22,7 @@ const Person = () => {
             body: JSON.stringify(payload)
         };
 
-        const response = await fetch("/api/application_form/person", requestOptions);
+        const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/application_form/person", requestOptions);
         if (!response.ok) {
             console.log("Плохой запрос");
         } else {

@@ -32,7 +32,7 @@ const Login = () => {
         };
 
         try {
-            const response = await fetch("/api/auth/token", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/auth/token", requestOptions);
 
             if (!response.ok) {
                 const ans = await response.json();
@@ -56,7 +56,7 @@ const Login = () => {
             };
 
 
-            const userResponse = await fetch("/api/user/me", userRequestOptions);
+            const userResponse = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/user/me", userRequestOptions);
 
             if (userResponse.ok) {
                 const userData = await userResponse.json();

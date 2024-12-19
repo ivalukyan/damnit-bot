@@ -27,7 +27,7 @@ const Registration = () => {
                 body: JSON.stringify({fullname, phone, email}),
             };
 
-            const response = await fetch("/api/auth/sign_up", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/auth/sign_up", requestOptions);
             const data = await response.json();
             setMessage(data.msg);
             setNotification(true);

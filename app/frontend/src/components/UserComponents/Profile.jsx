@@ -26,7 +26,7 @@ const Profile = () => {
         };
 
         try {
-            const response = await fetch("/api/user/me", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/user/me", requestOptions);
             if (response.ok) {
                 const data = await response.json();
                 setUserName(data.fullname);
@@ -57,7 +57,7 @@ const Profile = () => {
         };
 
         try {
-            const response = await fetch("/api/user/update", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/user/update", requestOptions);
             if (response.ok) {
                 const data = await response.json();
                 setUserName(data.fullname);

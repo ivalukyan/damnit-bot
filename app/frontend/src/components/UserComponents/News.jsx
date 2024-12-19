@@ -22,7 +22,7 @@ const UserNews = () => {
             body: JSON.stringify({ user_id: userId })
         }
 
-        const response = await fetch("/api/user/news", requestOptions);
+        const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/user/news", requestOptions);
 
         if (!response.ok){
             const data = await response.json();
@@ -49,7 +49,7 @@ const UserNews = () => {
             body: JSON.stringify({ news_id, user_id: userId })
         }
 
-        const response = await fetch("/api/user/news_del", requestOptions);
+        const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/user/news_del", requestOptions);
         if (!response.ok) {
             console.error("Bad request");
         } else {

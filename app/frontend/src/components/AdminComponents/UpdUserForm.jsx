@@ -20,7 +20,7 @@ const UpdateUserForm = () => {
                 })
             }
 
-            const response = await fetch("/api/admin/user/get_by_id", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/user/get_by_id", requestOptions);
             if (!response.ok) {
                 throw new Error("Failed get data card");
             }
@@ -49,7 +49,7 @@ const UpdateUserForm = () => {
             })
         }
 
-        const response = await fetch("/api/admin/user/update", requestOptions);
+        const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/user/update", requestOptions);
 
         if (!response.ok) {
             console.error("Failed data send");

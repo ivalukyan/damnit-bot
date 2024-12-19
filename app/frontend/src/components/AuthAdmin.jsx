@@ -37,7 +37,7 @@ const AuthAdmin = () => {
         };
 
         try {
-            const response = await fetch("/api/auth/token", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/auth/token", requestOptions);
 
             if (!response.ok) {
                 const ans = await response.json();
@@ -59,7 +59,7 @@ const AuthAdmin = () => {
                 },
             };
 
-            const adminResponse = await fetch("/api/admin/me", adminRequestOptions);
+            const adminResponse = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/me", adminRequestOptions);
 
             if (adminResponse.ok) {
                 const userData = await adminResponse.json();

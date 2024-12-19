@@ -37,7 +37,7 @@ const UserPanel = () => {
                 body: JSON.stringify({user_id: userId})
             };
 
-            const response = await fetch("/api/user/news", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/user/news", requestOptions);
 
             if (!response.ok) {
                 throw new Error("Failed loading user news");
@@ -73,7 +73,7 @@ const UserPanel = () => {
 
         try {
 
-            const response = await fetch("/api/news/save", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/news/save", requestOptions);
 
             if (!response.ok) {
                 console.error("Bad request");
@@ -97,7 +97,7 @@ const UserPanel = () => {
             },
         };
 
-        const response = await fetch("/api/user/me", requestOptions);
+        const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/user/me", requestOptions);
 
         if (!response.ok) {
             setToken(null);
@@ -115,7 +115,7 @@ const UserPanel = () => {
         };
 
         try {
-            const response = await fetch("/api/news/", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/news/", requestOptions);
             if (!response.ok) throw new Error("Network response was not ok");
             const data = await response.json();
             setNews(data);

@@ -12,7 +12,7 @@ const ChatsTape = () => {
                 headers: {"Content-Type": "application/json"}
             }
 
-            const response = await fetch("/api/admin/chats", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/chats", requestOptions);
             if (!response.ok) {
                 throw new Error("Failed loading chats");
             } else {

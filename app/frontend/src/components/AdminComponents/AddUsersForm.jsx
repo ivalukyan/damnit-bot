@@ -12,7 +12,7 @@ const AddUsersForm = () => {
         setError(null);
 
         try {
-            const response = await fetch("/api/admin/notifications", {
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/notifications", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
             });
@@ -37,7 +37,7 @@ const AddUsersForm = () => {
 
     const approveUser = useCallback(async (list, not_id) => {
         try {
-            const response = await fetch("/api/admin/notifications/approve", {
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/notifications/approve", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -64,7 +64,7 @@ const AddUsersForm = () => {
 
     const abortUser = useCallback(async (not_id) => {
         try {
-            const response = await fetch("/api/admin/notifications/rejection", {
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/notifications/rejection", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

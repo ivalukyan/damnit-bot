@@ -21,7 +21,7 @@ const UpdateStoreForm = () => {
                 })
             }
 
-            const response = await fetch("/api/admin/store/get_by_id", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/store/get_by_id", requestOptions);
             if (!response.ok){
                 throw new Error("Failed get data card");
             }
@@ -50,7 +50,7 @@ const UpdateStoreForm = () => {
             })
         }
 
-        const response = await fetch("/api/admin/store/update", requestOptions);
+        const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/store/update", requestOptions);
         if (!response.ok){
             throw new Error("Failed update card store");
         }

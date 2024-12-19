@@ -25,7 +25,7 @@ const UsersTape = () => {
                 },
             };
 
-            const response = await fetch("/api/admin/list_users", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/list_users", requestOptions);
             if (!response.ok) {
                 throw new Error("Не удалось загрузить список пользователей");
             }
@@ -56,7 +56,7 @@ const UsersTape = () => {
                 body: JSON.stringify({ user_id: userId }),
             };
 
-            const response = await fetch("/api/admin/user/delete", requestOptions);
+            const response = await fetch("https://ivalukyan-backend-damnitbot-12c1.twc1.net/admin/user/delete", requestOptions);
             if (!response.ok) {
                 throw new Error("Не удалось удалить пользователя");
             }
